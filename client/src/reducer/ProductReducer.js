@@ -1,6 +1,7 @@
 const productReducer = (
   state = {
-    posts: [],
+    listProduct: {},
+    isCreateProductSucces: false,
     loading: false,
     error: false,
     uploading: false,
@@ -9,25 +10,30 @@ const productReducer = (
   action,
 ) => {
   switch (action.type) {
-    // Upload Post
-    case 'UPLOAD_START':
-      return { ...state, error: false, uploading: true }
-    case 'UPLOAD_SUCCESS':
+    // Create Product
+    case 'CREATE_PRODUCT_START':
+      return { ...state, loading: true, error: false }
+    case 'CREATE_PRODUCT_SUCCESS':
       return {
         ...state,
-        posts: [action.data, ...state.posts],
-        uploading: false,
+        loading: false,
+        isCreateProductSucces: true,
         error: false,
       }
-    case 'UPLOAD_FAIL':
-      return { ...state, uploading: false, error: true }
+    case 'CREATE_PRODUCT_FAIL':
+      return { ...state, loading: false, error: true }
 
     // Get Post
-    case 'GET_POST_START':
+    case 'GET_PRODUCT_START':
       return { ...state, loading: true, error: false }
-    case 'GET_POST_SUCCESS':
-      return { ...state, posts: action.data, loading: false, error: false }
-    case 'GET_POST_FAIL':
+    case 'GET_PRODUCT_SUCCESS':
+      return {
+        ...state,
+        listProduct: action.data,
+        loading: false,
+        error: false,
+      }
+    case 'GET_PRODUCT_FAIL':
       return { ...state, loading: false, error: true }
 
     // Delete Post
@@ -57,6 +63,12 @@ const productReducer = (
       }
     case 'UPDATE_POST_FAIL':
       return { ...state, updating: false, error: true }
+
+    // Clear
+    case 'CLEAR_STATE_PRODUCT':
+      return {
+        isCreateProductSucces: false,
+      }
 
     default:
       return state

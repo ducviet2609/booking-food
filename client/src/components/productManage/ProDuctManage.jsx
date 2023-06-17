@@ -1,14 +1,45 @@
-import { Button, Table } from 'antd';
-import React, { useState } from 'react'
-import ModalAddProduct from './ModalAddProduct';
+import { Button, Pagination, Table } from 'antd'
+import React, { useEffect, useState } from 'react'
+import ModalAddProduct from './ModalAddProduct'
+import { useDispatch, useSelector } from 'react-redux'
+import { clearStateProduct, getProduct } from '../../action/ProductAction'
+import Loading from '../Loading/Loading'
 
 const ProDuctManage = (props) => {
+  const dispatch = useDispatch()
+  const listProduct = useSelector((state) => state.productReducer.listProduct)
+  const { isCreateProductSucces, loading } = useSelector(
+    (state) => state.productReducer,
+  )
 
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const baseRequest = {
+    page: 1,
+    size: 5,
+  }
+  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [dataRequest, setDataRquest] = useState(baseRequest)
+
+  useEffect(() => {
+    setIsOpenModal(false)
+    dispatch(clearStateProduct())
+    dispatch(
+      getProduct({
+        ...baseRequest,
+      }),
+    )
+  }, [isCreateProductSucces])
+
+  useEffect(() => {
+    dispatch(
+      getProduct({
+        ...dataRequest,
+      }),
+    )
+  }, [])
 
   const openModal = () => {
-    setIsOpenModal(true);
-  };
+    setIsOpenModal(true)
+  }
 
   const dataSource = [
     {
@@ -18,59 +49,109 @@ const ProDuctManage = (props) => {
 
       address: '10 Downing Street',
     },
+  ]
 
-  ];
-  
   const columns = [
     {
       title: 'Tên sản phẩm',
-      dataIndex: 'Tên sản phẩm',
-      key: 'product_name',
+      align: 'center',
+      dataIndex: 'title',
+      key: 'title',
     },
     {
+      align: 'center',
       title: 'Giá',
-      dataIndex: 'age',
-      key: 'product_price',
+      dataIndex: 'price',
+      key: 'price',
     },
     {
-      title: 'Giá',
-      dataIndex: 'address',
-      key: 'address',
+      title: 'Số lượng',
+      align: 'center',
+      dataIndex: 'number',
+      key: 'number',
     },
     {
-      title: 'Giá',
-      dataIndex: 'address',
-      key: 'address',
+      title: 'Danh mục',
+      align: 'center',
+
+      // dataIndex: 'category',
+      key: 'category',
+      render: (record) => {
+        if (record.category === 'food') {
+          return <span>Đồ ăn</span>
+        }
+        if (record.category === 'drink') {
+          return <span>Đồ uống</span>
+        }
+        if (record.category === 'orther') {
+          return <span>Khác</span>
+        }
+        if (record.category === 'vegetarian_food') {
+          return <span>Đồ chay</span>
+        }
+        if (record.category === 'cake') {
+          return <span>Bánh</span>
+        }
+      },
     },
     {
       title: 'Thao tác',
+      align: 'center',
       // dataIndex: 'address',
       key: 'actions',
       render: (record) => {
         return (
-
           <div>
-            <div>
-              
-            <Button onClick={()=> {console.log('record', record)}}>Sửa</Button>
-            <Button>Xóa</Button>
-
+            <div className="d-flex justify-content-center gap-1">
+              <Button
+                onClick={() => {
+                  console.log('record', record)
+                }}
+              >
+                Sửa
+              </Button>
+              <Button>Xóa</Button>
             </div>
           </div>
         )
-      }
+      },
     },
-  ];
-  
+  ]
+
+  const handlePageChange = (page) => {
+    const newDataRequest = {
+      ...dataRequest,
+      page,
+    }
+    setDataRquest(newDataRequest)
+    dispatch(
+      getProduct({
+        ...newDataRequest,
+      }),
+    )
+  }
+
   return (
-    <div className=''>
-      <div><Button type="primary" onClick={() => openModal()}>
-        Thêm sản phẩm
-      </Button>
-      
-      </div>
+    <div className="">
       <div>
-      <Table dataSource={dataSource} columns={columns} />;
+        <Button type="primary" onClick={() => openModal()}>
+          Thêm sản phẩm
+        </Button>
+      </div>
+      <div className="mt-1">
+        <Table
+          dataSource={listProduct && listProduct.data}
+          columns={columns}
+          pagination={false}
+        />
+        <div className="d-flex justify-content-center mt-2">
+          <Pagination
+            current={dataRequest.page}
+            pageSize={dataRequest.size}
+            total={(listProduct && listProduct.totalElement) || 0}
+            onChange={(page) => handlePageChange(page)}
+          />
+        </div>
       </div>
       {isOpenModal && (
         <ModalAddProduct
@@ -78,6 +159,7 @@ const ProDuctManage = (props) => {
           setIsOpenModal={setIsOpenModal}
         />
       )}
+      <Loading isLoading={loading} />
     </div>
   )
 }

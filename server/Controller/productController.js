@@ -51,7 +51,9 @@ export const getProduct = async (req, res) => {
           .find({})
           .skip((page - 1) * size)
           .limit(size)
-        res.status(200).json(newProduct)
+
+        const totalElement = await productModel.countDocuments()
+        res.status(200).json({ data: newProduct, totalElement })
       }
     } else {
       const newProduct = await productModel
