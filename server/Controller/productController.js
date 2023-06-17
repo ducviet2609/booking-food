@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import cloudinary from '../cloudinary/cloudinary.js'
 import productModel from '../Models/productModel.js'
+import userModel from '../models/userModel.js'
 
 // Create Product
 export const createProduct = async (req, res) => {
@@ -73,6 +74,36 @@ export const getProduct = async (req, res) => {
       const newProduct = await productModel.find({})
       res.status(200).json({ data: newProduct })
     }
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+// Thêm vào giỏ hàng
+export const addProductToCart = async (req, res) => {
+  const { productId, userId, number } = req.body
+  try {
+    const user = await userModel.findById(userId)
+    // thêm id sản phẩm vào trường cart
+    const newUser = await user.updateOne({
+      $push: { cart: { productId: productId, number: number } },
+    })
+    res.status(200).json({ stauts: 1 })
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+// Order sản phẩm
+export const orderProduct = async (req, res) => {
+  const { productId, userId, number } = req.body
+  try {
+    const user = await userModel.findById(userId)
+    // thêm id sản phẩm vào trường cart
+    const newUser = await user.updateOne({
+      $push: { cart: { productId: productId, number: number } },
+    })
+    res.status(200).json({ stauts: 1 })
   } catch (error) {
     res.status(500).json(error)
   }

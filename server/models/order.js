@@ -1,11 +1,9 @@
-import moogoose from 'mongoose'
+import mongoose from 'mongoose'
 const orderSchema = new moogoose.Schema(
   {
     userId: { type: String },
-    productId: { type: String },
-    count: { type: Number },
+    listProduct: [],
     totalAmount: { type: Number },
-    methods: { type: String },
     info: {},
     status: { type: String, default: 'waiting' },
   },
