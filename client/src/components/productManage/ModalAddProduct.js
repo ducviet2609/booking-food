@@ -7,11 +7,6 @@ const ModalAddProduct = (props) => {
   const { isOpenModal, setIsOpenModal } = props
   const dispatch = useDispatch()
   const loading = useSelector((state) => state.productReducer.loading)
-  const { dataProduct, createSuccess } = useSelector(
-    (state) => state.productReducer,
-  )
-
-  useEffect(() => {}, [createSuccess])
 
   const [dataRequest, setDataRquest] = useState({
     title: '',
@@ -21,9 +16,6 @@ const ModalAddProduct = (props) => {
     number: 0,
     category: 'food',
   })
-
-  console.log('dataProduct', dataProduct)
-  console.log('createSuccess', createSuccess)
 
   const handleCancel = () => {
     setIsOpenModal(false)
