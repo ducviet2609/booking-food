@@ -113,6 +113,14 @@ const ModalAddProduct = (props) => {
               label: 'Đồ uống',
             },
             {
+              value: 'vegetarian_food',
+              label: 'Món chay',
+            },
+            {
+              value: 'cake',
+              label: 'Bánh',
+            },
+            {
               value: 'orther',
               label: 'Khác',
             },
