@@ -47,15 +47,11 @@ export const getProduct = async (req, res) => {
           .find({
             title: { $regex: title, $options: 'i' },
           })
+          .sort({ createdAt: -1 })
           .skip((page - 1) * size)
           .limit(size)
         const totalElement = await productModel.countDocuments()
-        res.status(200).json({
-          data: newProduct.sort((a, b) => {
-            return new Date(b.createdAt) - new Date(a.createdAt)
-          }),
-          totalElement,
-        })
+        res.status(200).json({ data: newProduct, totalElement })
       }
       // tìm kiếm theo danh mục
       else if (category) {
@@ -63,35 +59,23 @@ export const getProduct = async (req, res) => {
           .find({
             category: category,
           })
+          .sort({ createdAt: -1 })
           .skip((page - 1) * size)
           .limit(size)
         const totalElement = await productModel.countDocuments()
-        res.status(200).json({
-          data: newProduct.sort((a, b) => {
-            return new Date(b.createdAt) - new Date(a.createdAt)
-          }),
-          totalElement,
-        })
+        res.status(200).json({ data: newProduct, totalElement })
       } else {
         const newProduct = await productModel
           .find({})
+          .sort({ createdAt: -1 })
           .skip((page - 1) * size)
           .limit(size)
         const totalElement = await productModel.countDocuments()
-        res.status(200).json({
-          data: newProduct.sort((a, b) => {
-            return new Date(b.createdAt) - new Date(a.createdAt)
-          }),
-          totalElement,
-        })
+        res.status(200).json({ data: newProduct, totalElement })
       }
     } else {
       const newProduct = await productModel.find({})
-      res.status(200).json({
-        data: newProduct.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt)
-        }),
-      })
+      res.status(200).json({ data: newProduct })
     }
   } catch (error) {
     res.status(500).json(error)
