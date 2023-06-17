@@ -50,7 +50,12 @@ export const getProduct = async (req, res) => {
           .skip((page - 1) * size)
           .limit(size)
         const totalElement = await productModel.countDocuments()
-        res.status(200).json({ data: newProduct, totalElement })
+        res.status(200).json({
+          data: newProduct.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt)
+          }),
+          totalElement,
+        })
       }
       // tìm kiếm theo danh mục
       else if (category) {
@@ -61,18 +66,32 @@ export const getProduct = async (req, res) => {
           .skip((page - 1) * size)
           .limit(size)
         const totalElement = await productModel.countDocuments()
-        res.status(200).json({ data: newProduct, totalElement })
+        res.status(200).json({
+          data: newProduct.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt)
+          }),
+          totalElement,
+        })
       } else {
         const newProduct = await productModel
           .find({})
           .skip((page - 1) * size)
           .limit(size)
         const totalElement = await productModel.countDocuments()
-        res.status(200).json({ data: newProduct, totalElement })
+        res.status(200).json({
+          data: newProduct.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt)
+          }),
+          totalElement,
+        })
       }
     } else {
       const newProduct = await productModel.find({})
-      res.status(200).json({ data: newProduct })
+      res.status(200).json({
+        data: newProduct.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt)
+        }),
+      })
     }
   } catch (error) {
     res.status(500).json(error)
