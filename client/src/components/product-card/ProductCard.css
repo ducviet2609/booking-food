@@ -5,11 +5,24 @@
     cursor: pointer;
 }
 .product_image{
+    display: flex;
+    justify-content: center;
+    width: 100% !important;
+    align-items: center;
     margin-bottom: 20px;
     transition: 0.3s;
+    width: 160px;
+    height: 160px;
 }
+
+.product_image > img {
+    object-fit: cover;
+    width: 100% !important;
+    height: 100% !important;
+}
+
 .product_image:hover{
-    transform: scale(1.5);
+    transform: scale(1.1);
 }
 
 .product__content h5 a{

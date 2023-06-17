@@ -31,7 +31,7 @@ const ProductCard = (props) => {
   }
 
   return (
-    <div className="product_item">
+    <div className="product_item d-flex flex-column ">
       <div className="product_image">
         <img src={image && image.url} alt="product___image" className="w-50" />
       </div>

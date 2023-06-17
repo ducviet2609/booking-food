@@ -93,27 +93,16 @@ const Foods = () => {
               </div>
             </Col>
 
-            <Col lg="6" md="6" className="mb-5">
-              <div className="sorting_widget text-end">
-                <select className="w-50">
-                  <option>Sắp xếp theo: Mặc định</option>
-                  <option value="ascending">Sắp xếp theo: A-Z</option>
-                  <option value="disascending">Sắp xếp theo: Z-A</option>
-                  <option value="high-price">Sắp xếp theo: Giá cao</option>
-                  <option value="low-price">Sắp xếp theo: Giá thấp</option>
-                </select>
-              </div>
-            </Col>
-
-            {listProduct &&
-              listProduct.data.map((item) => (
-                <Col lg="3" md="4" sm="6" xs="6" key={item.id} className="mb-4">
-                  <ProductCard item={item} />
-                </Col>
-              ))}
-
             <div className="panigation-icon"></div>
           </Row>
+          <div className="row d-flex mt-3">
+            {listProduct &&
+              listProduct.data.map((item) => (
+                <div className="col-md-3 p-2">
+                  <ProductCard item={item} />
+                </div>
+              ))}
+          </div>
         </Container>
       </section>
       <Loading isLoading={loading} />
