@@ -17,7 +17,7 @@ const Register = () => {
     email: '',
     password: '',
   }
-  const [dataRequest, setDateRequest] = useState(baseRequest)
+  const [dataRequest, setDateRequest] = useState(baseRequest)  
 
   useEffect(() => {
     if (user) {

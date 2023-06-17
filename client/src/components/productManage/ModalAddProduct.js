@@ -14,7 +14,7 @@ const ModalAddProduct = (props) => {
   useEffect(() => {}, [createSuccess])
 
   const [dataRequest, setDataRquest] = useState({
-    name: '',
+    title: '',
     image: null,
     description: '',
     price: '',
@@ -73,7 +73,7 @@ const ModalAddProduct = (props) => {
     >
       <div className="d-flex flex-column gap-3 p-3">
         <Input
-          name="name"
+          name="title"
           placeholder="Nhập tên sản phẩm"
           type="text"
           onChange={(e) => handleChange(e)}
