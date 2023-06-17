@@ -1,7 +1,15 @@
 import { Button, Table } from 'antd';
-import React from 'react'
+import React, { useState } from 'react'
+import ModalAddProduct from './ModalAddProduct';
 
-const ProDuctManage = () => {
+const ProDuctManage = (props) => {
+
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const openModal = () => {
+    setIsOpenModal(true);
+  };
+
   const dataSource = [
     {
       key: '1',
@@ -56,12 +64,20 @@ const ProDuctManage = () => {
   
   return (
     <div className=''>
-      <div>
-        <button className='addtoCart_btn'>Thêm sản phẩm</button>
+      <div><Button type="primary" onClick={() => openModal()}>
+        Thêm sản phẩm
+      </Button>
+      
       </div>
       <div>
       <Table dataSource={dataSource} columns={columns} />;
       </div>
+      {isOpenModal && (
+        <ModalAddProduct
+          isOpenModal={isOpenModal}
+          setIsOpenModal={setIsOpenModal}
+        />
+      )}
     </div>
   )
 }
