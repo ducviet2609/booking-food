@@ -33,31 +33,45 @@ export const createProduct = async (req, res) => {
 
 // get product
 export const getProduct = async (req, res) => {
-  const { title } = req.body
+  const { title, category } = req.body
   let page = req.query.page
   let size = req.query.size
   try {
     if (page) {
       page = parseInt(page)
       size = parseInt(size)
+      // tìm kiếm theo tên (title)
       if (title) {
         const newProduct = await productModel
-          .find({ title: title })
+          .find({
+            title: { $regex: title, $options: 'i' },
+          })
           .skip((page - 1) * size)
           .limit(size)
-        res.status(200).json(newProduct)
+        const totalElement = await productModel.countDocuments()
+        res.status(200).json({ data: newProduct, totalElement })
+      }
+      // tìm kiếm theo danh mục
+      else if (category) {
+        const newProduct = await productModel
+          .find({
+            category: category,
+          })
+          .skip((page - 1) * size)
+          .limit(size)
+        const totalElement = await productModel.countDocuments()
+        res.status(200).json({ data: newProduct, totalElement })
       } else {
         const newProduct = await productModel
           .find({})
           .skip((page - 1) * size)
           .limit(size)
-
         const totalElement = await productModel.countDocuments()
         res.status(200).json({ data: newProduct, totalElement })
       }
     } else {
-      const newProduct = await productModel
-      res.status(200).json(newProduct)
+      const newProduct = await productModel.find({})
+      res.status(200).json({ data: newProduct })
     }
   } catch (error) {
     res.status(500).json(error)

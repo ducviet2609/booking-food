@@ -22,5 +22,5 @@ export const getProduct = (dataRequest) => async (dispatch) => {
   }
 }
 
-export const clearStateProduct = () => async (dispatch) =>
+export const clearStateProduct = () => (dispatch) =>
   dispatch({ type: 'CLEAR_STATE_PRODUCT' })

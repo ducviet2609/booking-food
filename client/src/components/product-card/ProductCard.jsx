@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import '../product-card/ProductCard.css'
 
 const ProductCard = (props) => {
-  const { id, title, image01, price } = props.item
+  const { _id, title, image, price } = props.item
 
   const dispatch = useDispatch()
 
@@ -19,21 +19,22 @@ const ProductCard = (props) => {
   //   }))
   // }
 
+  const handleAddCart = () => {
+    console.log(_id)
+  }
+
   return (
     <div className="product_item">
       <div className="product_image">
-        <img src={image01} alt="product___image" className="w-50" />
+        <img src={image && image.url} alt="product___image" className="w-50" />
       </div>
       <div className="product__content">
         <h5>
-          <Link to={`/foods/${id}`}>{title}</Link>
+          <Link to={`/foods/${_id}`}>{title}</Link>
         </h5>
         <div className="d-flex align-items-content justify-content-between ">
           <span className="product__price">{price}đ</span>
-          <button
-            className="addtoCart_btn"
-            //  onClick={addtoCart}
-          >
+          <button className="addtoCart_btn" onClick={() => handleAddCart()}>
             Thêm vào giỏ hàng
           </button>
         </div>

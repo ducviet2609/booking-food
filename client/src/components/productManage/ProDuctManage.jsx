@@ -30,6 +30,7 @@ const ProDuctManage = (props) => {
   }, [isCreateProductSucces])
 
   useEffect(() => {
+    dispatch(clearStateProduct())
     dispatch(
       getProduct({
         ...dataRequest,
@@ -40,16 +41,6 @@ const ProDuctManage = (props) => {
   const openModal = () => {
     setIsOpenModal(true)
   }
-
-  const dataSource = [
-    {
-      key: '1',
-      name: 'Mike',
-      price: 32,
-
-      address: '10 Downing Street',
-    },
-  ]
 
   const columns = [
     {

@@ -8,9 +8,11 @@ import { useRef } from 'react'
 import '../pages/page-style/Login.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { logIn } from '../action/AuthAction'
+import Loading from '../components/Loading/Loading'
 const Login = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.authReducer.authData)
+  const { loading } = useSelector((state) => state.authReducer)
   const navigate = useNavigate()
 
   const baseRequest = {
@@ -77,6 +79,7 @@ const Login = () => {
           </Row>
         </Container>
       </section>
+      <Loading isLoading={loading} />
     </Helmet>
   )
 }

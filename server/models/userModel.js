@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const UserSchema = new mongoose.Schema(
   {
@@ -18,9 +18,10 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    cart: [],
   },
-  { timestamps: true }
-);
+  { timestamps: true },
+)
 
-const userModel = mongoose.model("users", UserSchema);
-export default userModel;
+const userModel = mongoose.model('users', UserSchema)
+export default userModel
