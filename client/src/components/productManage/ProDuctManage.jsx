@@ -40,10 +40,14 @@ const ProDuctManage = () => {
       key: 'actions',
       render: (record) => {
         return (
+
           <div>
+            <div>
+              
             <Button onClick={()=> {console.log('record', record)}}>Sửa</Button>
             <Button>Xóa</Button>
 
+            </div>
           </div>
         )
       }
@@ -52,8 +56,12 @@ const ProDuctManage = () => {
   
   return (
     <div className=''>
-
+      <div>
+        <button className='addtoCart_btn'>Thêm sản phẩm</button>
+      </div>
+      <div>
       <Table dataSource={dataSource} columns={columns} />;
+      </div>
     </div>
   )
 }
