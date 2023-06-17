@@ -31,7 +31,7 @@ const Admin = () => {
   ]
   return (
     <>
-    <h1>Admin</h1>
+    <h1 className='mt-5'>Admin</h1>
       <Space className=' mb-5'
         style={{
           marginBottom: 24,
