@@ -9,8 +9,11 @@ import Foods from '../pages/Foods'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
+import { useSelector } from 'react-redux'
 
 const Router = () => {
+  const user = useSelector((state) => state.authReducer.authData)
+  console.log(user)
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/trang-chu" />} />
@@ -19,9 +22,9 @@ const Router = () => {
       <Route path="/foods/:id" element={<FoodDetails />} />
       <Route path="/dang-ky" element={<Register />} />
       <Route path="/dang-nhap" element={<Login />} />
-      <Route path="/thanh-toan" element={<Checkout />} />
+      <Route path="/thanh-toan" element={user ? <Checkout /> : <Login />} />
       <Route path="/lien-he" element={<Contact />} />
-      <Route path="/gio-hang" element={<CartPage />} />
+      <Route path="/gio-hang" element={user ? <CartPage /> : <Login />} />
 
       <Route path="/admin" element={<Admin />} />
     </Routes>

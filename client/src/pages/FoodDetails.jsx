@@ -1,63 +1,60 @@
 import React from 'react'
-import  {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Container, Col, Row } from 'reactstrap'
 import Helmet from '../components/Helmet/Helmet'
 import AppSection from '../components/app-Section/AppSection'
 
-
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux'
 import ProductCard from '../components/product-card/ProductCard'
-import cartActions from '../store/shopping-cart/CartSlice'
+// import cartActions from '../store/shopping-cart/CartSlice'
 import products from '../assets/data/products'
 import '../pages/page-style/FoodDetails.css'
 
-
 const FoodDetails = () => {
-  const [tab, setTab] = useState("desc");
-  const [enteredName, setEnteredName] = useState("");
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [reviewMsg, setReviewMsg] = useState("");
-  const { id } = useParams();
-  const dispatch = useDispatch();
+  const [tab, setTab] = useState('desc')
+  const [enteredName, setEnteredName] = useState('')
+  const [enteredEmail, setEnteredEmail] = useState('')
+  const [reviewMsg, setReviewMsg] = useState('')
+  const { id } = useParams()
+  const dispatch = useDispatch()
 
-  const product = products.find((product) => product.id === id);
-  const [previewImg, setPreviewImg] = useState(product.image01);
-  const { title, price, category, desc, image01 } = product;
+  const product = products.find((product) => product.id === id)
+  const [previewImg, setPreviewImg] = useState(product.image01)
+  const { title, price, category, desc, image01 } = product
 
-  const relatedProduct = products.filter((item) => category === item.category);// same category product
+  const relatedProduct = products.filter((item) => category === item.category) // same category product
 
-  const addItem = () => {
-    dispatch(
-      cartActions.addItem({
-        id,
-        title,
-        price,
-        image01,
-      })
-    );
-  };
-
+  // const addItem = () => {
+  //   dispatch(
+  //     cartActions.addItem({
+  //       id,
+  //       title,
+  //       price,
+  //       image01,
+  //     })
+  //   );
+  // };
 
   const submitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    console.log(enteredName, enteredEmail, reviewMsg);
-  };
-
-  useEffect(() => {
-    setPreviewImg(product.image01);
-  }, [product]);
+    console.log(enteredName, enteredEmail, reviewMsg)
+  }
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [product]);
+    setPreviewImg(product.image01)
+  }, [product])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [product])
 
   return (
     <Helmet title="chi-tiet-san-phan">
       <AppSection title={title} />
 
-      <section className='mt-5'>
+      <section className="mt-5">
         <Container>
           <Row>
             <Col lg="2" md="2">
@@ -94,15 +91,18 @@ const FoodDetails = () => {
               <div className="single__product-content">
                 <h2 className="product__title mb-3">{title}</h2>
                 <p className="product__price">
-                  {" "}
+                  {' '}
                   Giá: <span>{price}đ</span>
                 </p>
                 <p className="category mb-5">
                   Danh mục: <span>{category}</span>
                 </p>
 
-                <button onClick={addItem} className="addtoCart_btn mt-5">
-                 Thêm vào giỏ hàng
+                <button
+                  // onClick={addItem}
+                  className="addtoCart_btn mt-5"
+                >
+                  Thêm vào giỏ hàng
                 </button>
               </div>
             </Col>
@@ -110,20 +110,20 @@ const FoodDetails = () => {
             <Col lg="12">
               <div className="tabs d-flex align-items-center gap-5 py-3">
                 <h6
-                  className={` ${tab === "desc" ? "tab__active" : ""}`}
-                  onClick={() => setTab("desc")}
+                  className={` ${tab === 'desc' ? 'tab__active' : ''}`}
+                  onClick={() => setTab('desc')}
                 >
                   Mô tả
                 </h6>
                 <h6
-                  className={` ${tab === "review" ? "tab__active" : ""}`}
-                  onClick={() => setTab("review")}
+                  className={` ${tab === 'review' ? 'tab__active' : ''}`}
+                  onClick={() => setTab('review')}
                 >
                   Đánh giá
                 </h6>
               </div>
 
-              {tab === "desc" ? (
+              {tab === 'desc' ? (
                 <div className="tab__content">
                   <p>{desc}</p>
                 </div>
@@ -196,7 +196,7 @@ const FoodDetails = () => {
         </Container>
       </section>
     </Helmet>
-  );
-};
+  )
+}
 
-export default FoodDetails;
+export default FoodDetails

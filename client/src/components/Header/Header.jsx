@@ -1,99 +1,111 @@
-import {React,useRef, useEffect} from 'react'
+import { React, useRef, useEffect } from 'react'
 
 import logo from '../../assets/image/res-logo.png'
 import { Container } from 'reactstrap'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import '../Header/Header.css'
-import { cartUiActions } from '../../store/shopping-cart/cartUISlice'
+import { Button } from 'antd'
+import { logOut } from '../../action/AuthAction'
+// import { cartUiActions } from '../../store/shopping-cart/cartUISlice'
 
 const nav_link = [
   {
     path: '/trang-chu',
-    display: 'Trang chủ'
+    display: 'Trang chủ',
   },
   {
     path: '/foods',
-    display: 'Sản phẩm'
+    display: 'Sản phẩm',
   },
   {
     path: '/gio-hang',
-    display: 'Giỏ hàng'
+    display: 'Giỏ hàng',
   },
   {
     path: '/lien-he',
-    display: 'Liên hệ'
+    display: 'Liên hệ',
   },
-
 ]
 const Header = () => {
-
-  const menuRef =useRef(null)
+  const menuRef = useRef(null)
   const headerRef = useRef(null)
-  const totalQuantity = useSelector(state=>state.cart.totalQuantity)
-
+  const user = useSelector((state) => state.authReducer.authData)
+  const totalQuantity = useSelector(
+    (state) => state.cart && state.cart.totalQuantity,
+  )
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  // const toggleCart = () => {
+  //   dispatch(cartUiActions.toggle());
+  // };
+  const toggleMenu = () => menuRef.current.classList.toggle('menu-show')
 
-  const toggleCart = () => {
-    dispatch(cartUiActions.toggle());
-  };
-  const toggleMenu=()=>menuRef.current.classList.toggle('menu-show')
-
-  useEffect(()=>
-  {
-    window.addEventListener('scroll',()=>
-    {
-      if(document.body.scrollTop > 80 || document.documentElement.scrollTop > 80)
-      {
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      if (
+        document.body.scrollTop > 80 ||
+        document.documentElement.scrollTop > 80
+      ) {
         headerRef.current.classList.add('header_shrink')
-      }
-      else{
+      } else {
         headerRef.current.classList.remove('header_shrink')
       }
     })
-    
-  },[]
-  );
+  }, [])
+
+  const handleLogout = () => {
+    dispatch(logOut())
+  }
 
   return (
-    <header className='header-header w-100' ref={headerRef}>
-      <Container className='header-container'>
-        <div className='header-wrapper d-flex align-items-center justify-content-between'>
-          <div className='header-logo'>
+    <header className="header-header w-100" ref={headerRef}>
+      <Container className="header-container">
+        <div className="header-wrapper d-flex align-items-center justify-content-between">
+          <div className="header-logo">
             <img src={logo} alt="header-logo" />
             <h5>Booking Food</h5>
           </div>
 
           {/* header-menu */}
-          <div className='header-navigation' ref={menuRef} onClick={toggleMenu  }>
-            <div className='header-menu d-flex align-items-center gap-5'>
-              {
-                nav_link.map((item, index) => (
-                  <NavLink
+          <div className="header-navigation" ref={menuRef} onClick={toggleMenu}>
+            <div className="header-menu d-flex align-items-center gap-5">
+              {nav_link.map((item, index) => (
+                <NavLink
                   onClick={toggleMenu}
-                   to={item.path} key={index}
-                  className={navClass =>navClass.isActive ?'active_menu':''}
-
-                  >{item.display}</NavLink>
-                ))
-              }
+                  to={item.path}
+                  key={index}
+                  className={(navClass) =>
+                    navClass.isActive ? 'active_menu' : ''
+                  }
+                >
+                  {item.display}
+                </NavLink>
+              ))}
             </div>
           </div>
 
           {/* header-right-icon */}
-          <div className='header-right-icon d-flex align-items-center gap-4'>
-            <span className='header-cart-icon'onClick={toggleCart} >
-              <i class="ri-shopping-cart-fill" ></i>
-              <span className='header-number-cart-icon'>{totalQuantity}</span>
+          <div className="header-right-icon d-flex align-items-center gap-4">
+            <span
+              className="header-cart-icon"
+              // onClick={toggleCart}
+            >
+              <i class="ri-shopping-cart-fill"></i>
+              <span className="header-number-cart-icon">{totalQuantity}</span>
             </span>
 
-            <span className='header-user-icon'>
-             <Link to='/dang-nhap'> <i class="ri-user-line"></i></Link>
-            </span>
+            {user ? (
+              <Button className="addtoCart-btn" onClick={() => handleLogout()}>
+                Đăng xuất
+              </Button>
+            ) : (
+              <Button onClick={() => navigate('/dang-nhap')}>Đăng nhập</Button>
+            )}
 
-            <span className='header-mobile-menu'onClick={toggleMenu}>
-            <i class="ri-menu-line"></i>
+            <span className="header-mobile-menu" onClick={toggleMenu}>
+              <i class="ri-menu-line"></i>
             </span>
           </div>
         </div>
