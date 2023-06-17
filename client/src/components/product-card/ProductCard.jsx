@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 // import { cartActions } from '../../store/shopping-cart/CartSlice'
 
 import '../product-card/ProductCard.css'
@@ -8,6 +8,9 @@ import '../product-card/ProductCard.css'
 const ProductCard = (props) => {
   const { _id, title, image, price } = props.item
 
+  const user = useSelector((state) => state.authReducer.authData)
+  const navigate = useNavigate()
+  console.log('user', user)
   const dispatch = useDispatch()
 
   // const addtoCart= () =>{
@@ -20,7 +23,11 @@ const ProductCard = (props) => {
   // }
 
   const handleAddCart = () => {
-    console.log(_id)
+    if (!user) {
+      navigate('/dang-nhap')
+    } else {
+      console.log(_id)
+    }
   }
 
   return (

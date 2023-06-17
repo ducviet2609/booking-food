@@ -12,6 +12,7 @@ import '../pages/page-style/Foods.css'
 import '../pages/page-style/paginate.css'
 import { getProduct } from '../action/ProductAction.js'
 import { useDispatch, useSelector } from 'react-redux'
+import Loading from '../components/Loading/Loading.js'
 
 const Foods = () => {
   const dispatch = useDispatch()
@@ -115,6 +116,7 @@ const Foods = () => {
           </Row>
         </Container>
       </section>
+      <Loading isLoading={loading} />
     </Helmet>
   )
 }
