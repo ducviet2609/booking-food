@@ -9,7 +9,7 @@ import '../pages/page-style/Home.css'
 import '../components/Helmet/Helmet.css'
 
 import Category from '../components/Category/Category.jsx'
-import products from '../assets/data/products.js'
+// import products from '../assets/data/products.js'
 import ProductCard from '../components/product-card/ProductCard.jsx'
 
 import productCategoryImg01 from '../assets/image/hamburger.png'
@@ -116,13 +116,6 @@ const Home = () => {
 
               <div className="hero_service mt-5">
                 <p className="d-flex align-items-center gap-2">
-                  <span className="shipping_icon">
-                    <i class="ri-car-line"></i>Miễn phí vận chuyển đơn hàng từ
-                    500k
-                  </span>
-                </p>
-
-                <p className="">
                   <span className="shipping_icon">
                     <i class="ri-car-line"></i>Miễn phí vận chuyển đơn hàng từ
                     500k

@@ -88,25 +88,18 @@ const Header = () => {
 
           {/* header-right-icon */}
           <div className="header-right-icon d-flex align-items-center gap-4">
-            <span
-              className="header-cart-icon"
-              // onClick={toggleCart}
-            >
-              <i class="ri-shopping-cart-fill"></i>
-              <span className="header-number-cart-icon">{totalQuantity}</span>
-            </span>
-
             {user ? (
-              <Button className="addtoCart-btn" onClick={() => handleLogout()}>
+              <Button className="addtoCart_btn" onClick={() => handleLogout()}>
                 Đăng xuất
               </Button>
             ) : (
-              <Button className='addtoCart_btn' onClick={() => navigate('/dang-nhap')}>Đăng nhập</Button>
+              <Button
+                className="addtoCart_btn"
+                onClick={() => navigate('/dang-nhap')}
+              >
+                Đăng nhập
+              </Button>
             )}
-
-            <span className="header-mobile-menu" onClick={toggleMenu}>
-              <i class="ri-menu-line"></i>
-            </span>
           </div>
         </div>
       </Container>

@@ -27,20 +27,18 @@
   text-decoration: none;
 }
 
-.header-menu a:hover {
-  color: #dd2f2f;
+.header-menu a:hover{
+    color: #dd2f2f;
 }
 
-.active_menu {
-  color: #dd2f2f !important;
+.active_menu{
+    color: #dd2f2f !important;
 }
 
-.header-cart-icon i,
-.header-user-icon i,
-.header-mobile-menu i {
-  font-size: 1.5rem;
-  color: #212245;
-  cursor: pointer;
+.header-cart-icon i, .header-user-icon i, .header-mobile-menu i{
+    font-size: 1.5rem;
+    color: #212245;
+    cursor: pointer;
 }
 
 .header-cart-icon {
@@ -77,52 +75,52 @@
   box-shadow: 5px 5px 15px -5px #fde4e4;
 }
 
+
 /* //responsive */
-@media only screen and (max-width: 992px) {
-  .header-logo img {
-    width: 30%;
-  }
-  .header-logo h5 {
-    font-size: 0.8rem;
-    margin-top: -15px;
-  }
+@media only screen and (max-width:992px) {
 
-  .header-navigation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0.0.0.534);
-    z-index: 99;
-    display: none;
-  }
+    .header-logo img{
+        width: 30%;
+    }
+    .header-logo h5{
+        font-size: 0.8rem;
+        margin-top: -15px;
+    }
 
-  .header-menu {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 250px;
-    height: 100%;
-    background: #fff;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-    line-height: 20px;
-  }
-  .header-menu {
-    line-height: 0.9rem;
-  }
-  .header-mobile-menu {
-    display: block;
-  }
-  .header-cart-icon i,
-  .header-user-icon i,
-  .header-mobile-menu i {
-    font-size: 1rem;
-  }
-  .menu-show {
-    display: block;
-  }
+    .header-navigation{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0.0.0.0.534);
+        z-index: 99;
+        display: none;
+    }
+
+    .header-menu{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 250px;
+        height: 100%;
+        background: #fff;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        line-height: 20px;
+    }
+    .header-menu{
+        line-height: 0.9rem;
+    }
+    .header-mobile-menu{
+        display: block;
+    }
+    .header-cart-icon i, .header-user-icon i, .header-mobile-menu i{
+        font-size: 1rem;
+    }
+    .menu-show{
+        display: block;
+    }
 }
