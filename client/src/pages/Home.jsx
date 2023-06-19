@@ -16,13 +16,16 @@ import productCategoryImg01 from '../assets/image/hamburger.png'
 import productCategoryImg02 from '../assets/image/pizza.png'
 import productCategoryImg03 from '../assets/image/bread.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProduct } from '../action/ProductAction.js'
+import { clearStateProduct, getProduct } from '../action/ProductAction.js'
 import Loading from '../components/Loading/Loading.js'
 
 const Home = () => {
   const dispatch = useDispatch()
   const listProduct = useSelector((state) => state.productReducer.listProduct)
-  const { loading } = useSelector((state) => state.productReducer)
+  const { loading, isAddToCartSuccess } = useSelector(
+    (state) => state.productReducer,
+  )
+
   const baseRequest = {
     category: '',
     page: 1,
@@ -31,6 +34,17 @@ const Home = () => {
   const [category, setCategory] = useState('Tất cả')
   // const [allProducts, setallProducts] = useState(products)
   const [dataRequest, setDataRquest] = useState(baseRequest)
+
+  useEffect(() => {
+    if (isAddToCartSuccess) {
+      dispatch(
+        getProduct({
+          ...dataRequest,
+        }),
+      )
+      dispatch(clearStateProduct())
+    }
+  }, [isAddToCartSuccess])
 
   useEffect(() => {
     dispatch(
@@ -206,6 +220,7 @@ const Home = () => {
             </Col>
 
             {listProduct &&
+              listProduct.data &&
               listProduct.data.map((item) => (
                 <Col lg="3" md="4" key={item.id} className="mt-5">
                   <ProductCard item={item} />

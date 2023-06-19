@@ -22,5 +22,16 @@ export const getProduct = (dataRequest) => async (dispatch) => {
   }
 }
 
+export const addProductToCart = (dataRequest) => async (dispatch) => {
+  dispatch({ type: 'ADD_PRODUCT_TO_CART_START' })
+  try {
+    const { data } = await ProductApi.addProductToCart(dataRequest)
+    dispatch({ type: 'ADD_PRODUCT_TO_CART_SUCCESS', data: data })
+  } catch (error) {
+    dispatch({ type: 'ADD_PRODUCT_TO_CART_FAIL' })
+    console.log(error)
+  }
+}
+
 export const clearStateProduct = () => (dispatch) =>
   dispatch({ type: 'CLEAR_STATE_PRODUCT' })

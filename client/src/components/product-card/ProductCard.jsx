@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 // import { cartActions } from '../../store/shopping-cart/CartSlice'
 
 import '../product-card/ProductCard.css'
+import CardModal from '../CardModal/CardModal'
 
 const ProductCard = (props) => {
   const { _id, title, image, price } = props.item
+  const { item } = props
 
   const user = useSelector((state) => state.authReducer.authData)
   const navigate = useNavigate()
-  console.log('user', user)
   const dispatch = useDispatch()
+  const [openCardModal, setOpenCardModal] = useState(false)
 
   // const addtoCart= () =>{
   //   dispatch(cartActions.addItem({
@@ -26,10 +28,9 @@ const ProductCard = (props) => {
     if (!user) {
       navigate('/dang-nhap')
     } else {
-      console.log(_id)
+      setOpenCardModal(true)
     }
   }
-
   return (
     <div className="product_item d-flex flex-column ">
       <div className="product_image">
@@ -46,6 +47,13 @@ const ProductCard = (props) => {
           </button>
         </div>
       </div>
+      {openCardModal && (
+        <CardModal
+          openCardModal={openCardModal}
+          setOpenCardModal={setOpenCardModal}
+          item={item}
+        />
+      )}
     </div>
   )
 }

@@ -10,14 +10,16 @@ import ProductCard from '../components/product-card/ProductCard'
 
 import '../pages/page-style/Foods.css'
 import '../pages/page-style/paginate.css'
-import { getProduct } from '../action/ProductAction.js'
+import { clearStateProduct, getProduct } from '../action/ProductAction.js'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../components/Loading/Loading.js'
 
 const Foods = () => {
   const dispatch = useDispatch()
   const listProduct = useSelector((state) => state.productReducer.listProduct)
-  const { loading } = useSelector((state) => state.productReducer)
+  const { loading, isAddToCartSuccess } = useSelector(
+    (state) => state.productReducer,
+  )
 
   const baseRequest = {
     title: '',
@@ -27,6 +29,17 @@ const Foods = () => {
   const [searchItem, setsearchItem] = useState('')
   const [dataRequest, setDataRquest] = useState(baseRequest)
   const [pageNumber, setPageNumber] = useState(0)
+
+  useEffect(() => {
+    if (isAddToCartSuccess) {
+      dispatch(
+        getProduct({
+          ...dataRequest,
+        }),
+      )
+      dispatch(clearStateProduct())
+    }
+  }, [isAddToCartSuccess])
 
   useEffect(() => {
     dispatch(

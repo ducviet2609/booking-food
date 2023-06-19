@@ -13,7 +13,6 @@ import { useSelector } from 'react-redux'
 
 const Router = () => {
   const user = useSelector((state) => state.authReducer.authData)
-  console.log(user)
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/trang-chu" />} />
