@@ -84,7 +84,7 @@ const CardModal = (props) => {
           <Button onClick={() => handleChangeNumber('plus')}>+</Button>
         </div>
         <div className="d-flex justify-content-center gap-2 mt-auto">
-          <Button type="primary" danger>
+          <Button onClick={() => handleClose()} type="primary" danger>
             Huỷ
           </Button>
           <Button type="primary" onClick={() => handleAddtoCart()}>
