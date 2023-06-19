@@ -29,7 +29,7 @@ const Home = () => {
   const baseRequest = {
     category: '',
     page: 1,
-    size: 8,
+    size: 16,
   }
   const [category, setCategory] = useState('Tất cả')
   // const [allProducts, setallProducts] = useState(products)

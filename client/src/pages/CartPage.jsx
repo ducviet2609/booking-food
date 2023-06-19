@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Container, Row, Col } from 'reactstrap'
 
@@ -15,15 +15,33 @@ const CartPage = () => {
   const user = useSelector((state) => state.authReducer.authData)
   const { listCart } = useSelector((state) => state.productReducer)
   const cartItems = useSelector((state) => state.cart && state.cart.cartItems)
-  const totalAmount = useSelector(
-    (state) => state.cart && state.cart.totalAmount,
-  )
+  // const totalAmount = useSelector(
+  //   (state) => state.cart && state.cart.totalAmount,
+  // )
   const dispatch = useDispatch()
+
+  const [orderList, setOrderList] = useState([])
+  const [totalAmount, setToTalAmount] = useState(0)
   useEffect(() => {
     if (user) {
       dispatch(getCartByUser(user.user._id))
     }
   }, [user])
+
+  const handleChecked = (e, record) => {
+    let newOrderList = orderList
+    if (e.target.checked) {
+      newOrderList.push(record)
+      setToTalAmount(
+        (prev) => prev + Number(record.price) * Number(record.number),
+      )
+      setOrderList(newOrderList)
+    }
+    if (!e.target.checked) {
+      newOrderList = newOrderList.filter((item) => item.id !== record.id)
+      setOrderList(newOrderList)
+    }
+  }
 
   const columns = [
     {
@@ -32,7 +50,7 @@ const CartPage = () => {
       // dataIndex: 'title',
       key: 'action',
       render: (record) => {
-        return <Checkbox />
+        return <Checkbox onChange={(e) => handleChecked(e, record)} />
       },
     },
     {
@@ -109,6 +127,9 @@ const CartPage = () => {
                   <button className="addtoCart_btn">
                     <Link to="/thanh-toan ">Thanh toán đơn hàng</Link>
                   </button>
+                  {/* <Button onClick={() => console.log('orderList', orderList)}>
+                    Đặt hàng
+                  </Button> */}
                 </div>
               </div>
             </Col>

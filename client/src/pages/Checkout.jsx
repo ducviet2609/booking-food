@@ -8,43 +8,42 @@ import Helmet from '../components/Helmet/Helmet'
 import '../pages/page-style/Checkout.css'
 
 const Checkout = () => {
+  const [enterName, setEnterName] = useState('')
+  const [enterEmail, setEnterEmail] = useState('')
+  const [enterNumber, setEnterNumber] = useState('')
+  const [enterAddress, setEnterAddress] = useState('')
 
-  const [enterName, setEnterName] = useState("");
-  const [enterEmail, setEnterEmail] = useState("");
-  const [enterNumber, setEnterNumber] = useState("");
-  const [enterAddress, setEnterAddress] = useState("");
+  const shippingInfo = []
+  const cartTotalAmount = useSelector(
+    (state) => state.cart && state.cart.totalAmount,
+  )
+  const shippingCost = 30000
 
-
-  const shippingInfo = [];
-  const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
-  const shippingCost = 30000;
-
-  const totalAmount = cartTotalAmount + Number(shippingCost);
+  const totalAmount = cartTotalAmount + Number(shippingCost)
 
   const submitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     const userShippingAddress = {
       name: enterName,
       email: enterEmail,
       phone: enterNumber,
       address: enterAddress,
-    };
+    }
 
-    shippingInfo.push(userShippingAddress);
-    console.log(shippingInfo);
-  };
+    shippingInfo.push(userShippingAddress)
+    console.log(shippingInfo)
+  }
 
   return (
-    
-    <Helmet title ='thanh-toan'>
-      <AppSection title='Thanh toán đơn hàng'/>
+    <Helmet title="thanh-toan">
+      <AppSection title="Thanh toán đơn hàng" />
       <section>
         <Container>
           <Row>
-            <Col lg ='8' md='6' className='mt-5'>
-              <h6 className='mb-4'>Địa chỉ nhận hàng</h6>
-              <form   className="checkout__form" onSubmit={submitHandler}>
-              <div className="form__group">
+            <Col lg="8" md="6" className="mt-5">
+              <h6 className="mb-4">Địa chỉ nhận hàng</h6>
+              <form className="checkout__form" onSubmit={submitHandler}>
+                <div className="form__group">
                   <input
                     type="text"
                     placeholder="Nhập tên của bạn"
@@ -85,11 +84,9 @@ const Checkout = () => {
                 </button>
               </form>
             </Col>
-            <Col lg='4' md='6'>
+            <Col lg="4" md="6"></Col>
 
-            </Col>
-
-            <Col lg="4" md="6" className='mt-5'>
+            <Col lg="4" md="6" className="mt-5">
               <div className="checkout_bill">
                 <h6 className="d-flex align-items-center justify-content-between mb-3">
                   Subtotal: <span>${cartTotalAmount}</span>
@@ -104,7 +101,6 @@ const Checkout = () => {
                 </div>
               </div>
             </Col>
-
           </Row>
         </Container>
       </section>
