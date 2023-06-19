@@ -7,6 +7,7 @@ const productReducer = (
     uploading: false,
     updating: false,
     isAddToCartSuccess: false,
+    listCart: [],
   },
   action,
 ) => {
@@ -47,6 +48,18 @@ const productReducer = (
         error: false,
       }
     case 'ADD_PRODUCT_TO_CART_FAIL':
+      return { loading: false, error: true }
+
+    // get cart
+    case 'GET_CART_BY_USER_START':
+      return { loading: true, error: false }
+    case 'GET_CART_BY_USER_SUCCESS':
+      return {
+        listCart: action.data,
+        loading: false,
+        error: false,
+      }
+    case 'GET_CART_BY_USER_FAIL':
       return { loading: false, error: true }
 
     // Clear

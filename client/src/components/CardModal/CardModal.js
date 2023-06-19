@@ -43,6 +43,7 @@ const CardModal = (props) => {
       productId: item._id,
       userId: user.user._id,
       number: numberProduct,
+      price: item.price,
     }
     dispatch(addProductToCart(newDataRequest))
   }
@@ -66,9 +67,9 @@ const CardModal = (props) => {
             <span className="fw-600">
               Giá tiền: <b>{item.price}đ</b>
             </span>
-            {/* <span>
-              Số lượng: <b>{item.number}</b>
-            </span> */}
+            <span>
+              Số lượng trong kho: <b>{item.number}</b>
+            </span>
           </div>
         </div>
         <div className="d-flex justify-content-center align-items-center mt-3 gap-2">

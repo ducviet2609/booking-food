@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import cloudinary from '../cloudinary/cloudinary.js'
 import productModel from '../Models/productModel.js'
 import userModel from '../models/userModel.js'
+import { v4 as uuid } from 'uuid'
 
 // Create Product
 export const createProduct = async (req, res) => {
@@ -84,12 +85,20 @@ export const getProduct = async (req, res) => {
 
 // Thêm vào giỏ hàng
 export const addProductToCart = async (req, res) => {
-  const { productId, userId, title, number } = req.body
+  const { productId, userId, title, number, price } = req.body
   try {
     const user = await userModel.findById(userId)
     // thêm id sản phẩm vào trường cart
     const newUser = await user.updateOne({
-      $push: { cart: { productId: productId, title: title, number: number } },
+      $push: {
+        cart: {
+          id: uuid(),
+          productId: productId,
+          title: title,
+          number: number,
+          price: price,
+        },
+      },
     })
     const product = await productModel.findById(productId)
     await product.updateOne({ number: product.number - number })

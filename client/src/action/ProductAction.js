@@ -33,5 +33,16 @@ export const addProductToCart = (dataRequest) => async (dispatch) => {
   }
 }
 
+export const getCartByUser = (id) => async (dispatch) => {
+  dispatch({ type: 'GET_CART_BY_USER_START' })
+  try {
+    const { data } = await ProductApi.getCartByUser(id)
+    dispatch({ type: 'GET_CART_BY_USER_SUCCESS', data: data })
+  } catch (error) {
+    dispatch({ type: 'GET_CART_BY_USER_FAIL' })
+    console.log(error)
+  }
+}
+
 export const clearStateProduct = () => (dispatch) =>
   dispatch({ type: 'CLEAR_STATE_PRODUCT' })

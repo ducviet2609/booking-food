@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Container, Row, Col } from 'reactstrap'
 
@@ -8,12 +8,74 @@ import Helmet from '../components/Helmet/Helmet'
 import AppSection from '../components/app-Section/AppSection'
 
 import '../pages/page-style/CartPage.css'
+import { getCartByUser } from '../action/ProductAction'
+import { Button, Checkbox, Table } from 'antd'
 
 const CartPage = () => {
+  const user = useSelector((state) => state.authReducer.authData)
+  const { listCart } = useSelector((state) => state.productReducer)
   const cartItems = useSelector((state) => state.cart && state.cart.cartItems)
   const totalAmount = useSelector(
     (state) => state.cart && state.cart.totalAmount,
   )
+  const dispatch = useDispatch()
+  useEffect(() => {
+    if (user) {
+      dispatch(getCartByUser(user.user._id))
+    }
+  }, [user])
+
+  const columns = [
+    {
+      title: 'Lựa chọn',
+      align: 'center',
+      // dataIndex: 'title',
+      key: 'action',
+      render: (record) => {
+        return <Checkbox />
+      },
+    },
+    {
+      title: 'Tên sản phẩm',
+      align: 'center',
+      dataIndex: 'title',
+      key: 'title',
+    },
+    {
+      align: 'center',
+      title: 'Giá',
+      dataIndex: 'price',
+      key: 'price',
+    },
+    {
+      title: 'Số lượng',
+      align: 'center',
+      dataIndex: 'number',
+      key: 'number',
+    },
+    {
+      title: 'Thao tác',
+      align: 'center',
+      // dataIndex: 'address',
+      key: 'actions',
+      render: (record) => {
+        return (
+          <div>
+            <div className="d-flex justify-content-center gap-1">
+              {/* <Button
+                onClick={() => {
+                  console.log('record', record)
+                }}
+              >
+                Sửa
+              </Button> */}
+              <Button>Xóa</Button>
+            </div>
+          </div>
+        )
+      },
+    },
+  ]
 
   return (
     <Helmet title="gio-hang">
@@ -27,22 +89,11 @@ const CartPage = () => {
                   Không có sản phẩm trong giỏ hàng
                 </h5>
               ) : (
-                <table className="table table-bordered">
-                  <thead>
-                    <tr className="tr_class">
-                      <th>Sản phẩm</th>
-                      <th>Tên sản phẩm</th>
-                      <th>Giá</th>
-                      <th>Số lượng</th>
-                      <th>Xóa</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {cartItems &&
-                      cartItems.map((item) => <Tr item={item} key={item.id} />)}
-                  </tbody>
-                </table>
+                <Table
+                  dataSource={(listCart && listCart.data) || []}
+                  columns={columns}
+                  pagination={false}
+                />
               )}
 
               <div className="mt-4 mb-5">
