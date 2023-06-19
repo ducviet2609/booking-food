@@ -1,9 +1,7 @@
 import React from 'react'
 
 const OrderMage = () => {
-  return (
-    <div>OrderMage</div>
-  )
+  return <div></div>
 }
 
 export default OrderMage

@@ -6,7 +6,3 @@
     transition: 0.4s;
 }
 
-.category__item:hover{
-    transform: translateY(-15px);
-}
-
