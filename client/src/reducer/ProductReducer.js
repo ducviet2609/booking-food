@@ -6,6 +6,7 @@ const productReducer = (
     error: false,
     uploading: false,
     updating: false,
+    isAddToCartSuccess: false,
   },
   action,
 ) => {
@@ -23,7 +24,7 @@ const productReducer = (
     case 'CREATE_PRODUCT_FAIL':
       return { ...state, loading: false, error: true }
 
-    // Get Post
+    // Get Product
     case 'GET_PRODUCT_START':
       return { ...state, loading: true, error: false }
     case 'GET_PRODUCT_SUCCESS':
@@ -36,38 +37,23 @@ const productReducer = (
     case 'GET_PRODUCT_FAIL':
       return { ...state, loading: false, error: true }
 
-    // Delete Post
-    case 'DELETE_POST_START':
-      return { ...state, error: false }
-    case 'DELETE_POST_SUCCESS':
+    // Add product to cart
+    case 'ADD_PRODUCT_TO_CART_START':
+      return { loading: true, error: false }
+    case 'ADD_PRODUCT_TO_CART_SUCCESS':
       return {
-        ...state,
+        isAddToCartSuccess: true,
+        loading: false,
         error: false,
-        posts: [...state.posts.filter((post) => post._id !== action.data)],
       }
-    case 'DELETE_POST_FAIL':
-      return { ...state, error: true }
-
-    // Update Post
-    case 'UPDATE_POST_START':
-      return { ...state, updating: true, error: false }
-    case 'UPDATE_POST_SUCCESS':
-      return {
-        ...state,
-        updating: false,
-        error: true,
-        posts: [
-          action.data,
-          ...state.posts.filter((post) => post._id !== action.data._id),
-        ],
-      }
-    case 'UPDATE_POST_FAIL':
-      return { ...state, updating: false, error: true }
+    case 'ADD_PRODUCT_TO_CART_FAIL':
+      return { loading: false, error: true }
 
     // Clear
     case 'CLEAR_STATE_PRODUCT':
       return {
         isCreateProductSucces: false,
+        isAddToCartSuccess: false,
       }
 
     default:
