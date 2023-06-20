@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap'
 import logo from '../../assets/image/res-logo.png'
 import '../Footer/Footer.css'
@@ -47,6 +48,42 @@ const Footer = () => {
                     <br />
                   </span>
                   <span>Email: ducviet260909@gmail.com</span>
+                </ListGroupItem>
+              </ListGroup>
+            </Col>
+
+            <Col lg="3" sm="4" md="6">
+              <ListGroup className="footer_listgroup">
+                <h5 className="footer_title">Follow us</h5>
+                <ListGroupItem className="footer_listgroup_item border-0 ps-0">
+                  <div className="social__links d-flex align-items-center gap-4 ">
+                    <span>
+                      {' '}
+                      <Link to="https://www.facebook.com/ducviet260909/">
+                        <i class="ri-facebook-line"></i>
+                      </Link>{' '}
+                    </span>
+
+                    <span>
+                      <Link to="https://github.com">
+                        <i class="ri-github-line"></i>
+                      </Link>
+                    </span>
+
+                    <span>
+                      {' '}
+                      <Link to=" https://www.youtube.com">
+                        <i class="ri-youtube-line"></i>
+                      </Link>{' '}
+                    </span>
+
+                    <span>
+                      {' '}
+                      <Link to=" https://www.linkedin.com">
+                        <i class="ri-linkedin-line"></i>
+                      </Link>{' '}
+                    </span>
+                  </div>
                 </ListGroupItem>
               </ListGroup>
             </Col>
