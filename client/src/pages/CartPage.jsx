@@ -10,10 +10,11 @@ import AppSection from '../components/app-Section/AppSection'
 import '../pages/page-style/CartPage.css'
 import { getCartByUser } from '../action/ProductAction'
 import { Button, Checkbox, Table } from 'antd'
+import Loading from '../components/Loading/Loading'
 
 const CartPage = () => {
   const user = useSelector((state) => state.authReducer.authData)
-  const { listCart } = useSelector((state) => state.productReducer)
+  const { listCart, loading } = useSelector((state) => state.productReducer)
   const cartItems = useSelector((state) => state.cart && state.cart.cartItems)
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -150,6 +151,7 @@ const CartPage = () => {
           </Row>
         </Container>
       </section>
+      <Loading isLoading={loading} />
     </Helmet>
   )
 }

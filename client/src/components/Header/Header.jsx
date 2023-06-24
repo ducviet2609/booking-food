@@ -115,9 +115,15 @@ const Header = () => {
           {/* header-right-icon */}
           <div className="header-right-icon d-flex align-items-center gap-4">
             {user ? (
-              <Button className="addtoCart_btn" onClick={() => handleLogout()}>
-                Đăng xuất
-              </Button>
+              <div className="d-flex gap-2 align-items-center">
+                <strong>{user && user.user.username}</strong>
+                <Button
+                  className="addtoCart_btn"
+                  onClick={() => handleLogout()}
+                >
+                  Đăng xuất
+                </Button>
+              </div>
             ) : (
               <Button
                 className="addtoCart_btn"
