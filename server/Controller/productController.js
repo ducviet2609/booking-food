@@ -149,10 +149,10 @@ export const deleteProductOnCart = async (req, res) => {
       $pull: {
         cart: {
           id: cartId,
-          productId: cart.productId,
-          title: cart.title,
-          number: cart.number,
-          price: cart.price,
+          // productId: cart.productId,
+          // title: cart.title,
+          // number: cart.number,
+          // price: cart.price,
         },
       },
     })
