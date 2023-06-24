@@ -3,6 +3,7 @@ import cloudinary from '../cloudinary/cloudinary.js'
 import productModel from '../Models/productModel.js'
 import userModel from '../models/userModel.js'
 import { v4 as uuid } from 'uuid'
+import OrderModel from '../models/order.js'
 
 // Create Product
 export const createProduct = async (req, res) => {
@@ -110,14 +111,109 @@ export const addProductToCart = async (req, res) => {
 
 // Order sản phẩm
 export const orderProduct = async (req, res) => {
-  const { productId, userId, number } = req.body
+  const { listCart, userId } = req.body
   try {
+    // const user = await userModel.findById(userId)
+    const newOrder = new OrderModel(req.body)
+    await newOrder.save()
     const user = await userModel.findById(userId)
-    // thêm id sản phẩm vào trường cart
-    const newUser = await user.updateOne({
-      $push: { cart: { productId: productId, number: number } },
-    })
+    const listCartOld = user.cart
+    const tempArray = []
+
+    for (let item1 of listCart) {
+      const id1 = item1.id
+      let found = false
+      for (let item2 of listCartOld) {
+        const id2 = item2.id
+        if (id1 === id2) {
+          found = true
+          break
+        }
+      }
+      if (!found) {
+        tempArray.push(item1)
+      }
+    }
+
+    for (let item2 of listCartOld) {
+      const id2 = item2.id
+      let found = false
+      for (let item1 of listCart) {
+        const id1 = item1.id
+        if (id2 === id1) {
+          found = true
+          break
+        }
+      }
+      if (!found) {
+        tempArray.push(item2)
+      }
+    }
+    await user.updateOne({ cart: tempArray })
     res.status(200).json({ stauts: 1 })
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+// get list order
+export const getListOrder = async (req, res) => {
+  // const { listCart, userId } = req.body
+  let page = req.query.page
+  let size = req.query.size
+  try {
+    if (page) {
+      page = parseInt(page)
+      size = parseInt(size)
+      const listOrder = await OrderModel.find({})
+        .sort({ createdAt: -1 })
+        .skip((page - 1) * size)
+        .limit(size)
+      const totalElement = await OrderModel.countDocuments()
+      res.status(200).json({ data: listOrder, totalElement })
+    } else {
+      const listOrder = await productModel.find({})
+      res.status(200).json({ data: listOrder })
+    }
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+// get list order by userID
+export const getListOrderById = async (req, res) => {
+  const userId = req.params
+  let page = req.query.page
+  let size = req.query.size
+  try {
+    if (page) {
+      page = parseInt(page)
+      size = parseInt(size)
+      const listOrder = await OrderModel.find({ userId: userId.userId })
+        .sort({ createdAt: -1 })
+        .skip((page - 1) * size)
+        .limit(size)
+
+      const totalElement = await OrderModel.countDocuments()
+      res.status(200).json({ data: listOrder, totalElement })
+    } else {
+      const listOrder = await productModel.find({ userId: userId.userId })
+      res.status(200).json({ data: listOrder })
+    }
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+// xác nhận đơn hàng
+export const approveOrder = async (req, res) => {
+  const { type, orderId } = req.body
+  try {
+    const order = await OrderModel.findById(orderId)
+    await order.updateOne({
+      status: type,
+    })
+    res.status(200).json({ status: 1 })
   } catch (error) {
     res.status(500).json(error)
   }

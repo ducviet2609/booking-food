@@ -10,24 +10,6 @@ import { Button } from 'antd'
 import { logOut } from '../../action/AuthAction'
 // import { cartUiActions } from '../../store/shopping-cart/cartUISlice'
 
-const nav_link = [
-  {
-    path: '/trang-chu',
-    display: 'Trang chủ',
-  },
-  {
-    path: '/foods',
-    display: 'Sản phẩm',
-  },
-  {
-    path: '/gio-hang',
-    display: 'Giỏ hàng',
-  },
-  {
-    path: '/lien-he',
-    display: 'Liên hệ',
-  },
-]
 const Header = () => {
   const menuRef = useRef(null)
   const headerRef = useRef(null)
@@ -40,6 +22,37 @@ const Header = () => {
   // const toggleCart = () => {
   //   dispatch(cartUiActions.toggle());
   // };
+
+  const nav_link = [
+    {
+      path: '/trang-chu',
+      display: 'Trang chủ',
+    },
+    {
+      path: '/foods',
+      display: 'Sản phẩm',
+    },
+    {
+      path: '/gio-hang',
+      display: 'Giỏ hàng',
+    },
+    {
+      path: '/don-hang',
+      display: 'Đơn hàng',
+    },
+    {
+      path: '/lien-he',
+      display: 'Liên hệ',
+    },
+  ]
+
+  const nav_link_admin = [
+    {
+      path: '/admin',
+      display: 'Quản Lý',
+    },
+  ]
+
   const toggleMenu = () => menuRef.current.classList.toggle('menu-show')
 
   useEffect(() => {
@@ -71,18 +84,31 @@ const Header = () => {
           {/* header-menu */}
           <div className="header-navigation" ref={menuRef} onClick={toggleMenu}>
             <div className="header-menu d-flex align-items-center gap-5">
-              {nav_link.map((item, index) => (
-                <NavLink
-                  onClick={toggleMenu}
-                  to={item.path}
-                  key={index}
-                  className={(navClass) =>
-                    navClass.isActive ? 'active_menu' : ''
-                  }
-                >
-                  {item.display}
-                </NavLink>
-              ))}
+              {user && user.user.admin
+                ? nav_link_admin.map((item, index) => (
+                    <NavLink
+                      onClick={toggleMenu}
+                      to={item.path}
+                      key={index}
+                      className={(navClass) =>
+                        navClass.isActive ? 'active_menu' : ''
+                      }
+                    >
+                      {item.display}
+                    </NavLink>
+                  ))
+                : nav_link.map((item, index) => (
+                    <NavLink
+                      onClick={toggleMenu}
+                      to={item.path}
+                      key={index}
+                      className={(navClass) =>
+                        navClass.isActive ? 'active_menu' : ''
+                      }
+                    >
+                      {item.display}
+                    </NavLink>
+                  ))}
             </div>
           </div>
 

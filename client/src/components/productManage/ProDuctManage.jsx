@@ -4,6 +4,7 @@ import ModalAddProduct from './ModalAddProduct'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearStateProduct, getProduct } from '../../action/ProductAction'
 import Loading from '../Loading/Loading'
+import ModalEditProduct from './ModalEditProduct'
 
 const ProDuctManage = (props) => {
   const dispatch = useDispatch()
@@ -17,7 +18,9 @@ const ProDuctManage = (props) => {
     size: 5,
   }
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const [isOpenModalEdit, setIsOpenModalEdit] = useState(false)
   const [dataRequest, setDataRquest] = useState(baseRequest)
+  const [itemProduct, setItemProduct] = useState({})
 
   useEffect(() => {
     setIsOpenModal(false)
@@ -40,6 +43,11 @@ const ProDuctManage = (props) => {
 
   const openModal = () => {
     setIsOpenModal(true)
+  }
+
+  const handleOpenModalEdit = (item) => {
+    setItemProduct(item)
+    setIsOpenModalEdit(true)
   }
 
   const columns = [
@@ -96,7 +104,7 @@ const ProDuctManage = (props) => {
             <div className="d-flex justify-content-center gap-1">
               <Button
                 onClick={() => {
-                  console.log('record', record)
+                  handleOpenModalEdit(record)
                 }}
               >
                 Sửa
@@ -148,6 +156,13 @@ const ProDuctManage = (props) => {
         <ModalAddProduct
           isOpenModal={isOpenModal}
           setIsOpenModal={setIsOpenModal}
+        />
+      )}
+      {isOpenModalEdit && (
+        <ModalEditProduct
+          isOpenModalEdit={isOpenModalEdit}
+          setIsOpenModalEdit={setIsOpenModalEdit}
+          itemProduct={itemProduct}
         />
       )}
       <Loading isLoading={loading} />

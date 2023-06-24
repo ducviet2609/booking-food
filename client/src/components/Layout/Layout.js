@@ -10,7 +10,7 @@ const Layout = () => {
   const showCart = useSelector(
     (state) => state.cartUi && state.cartUi.cartIsVisible,
   )
-  console.log(user)
+  // console.log(user)
   return (
     <div>
       <Header />

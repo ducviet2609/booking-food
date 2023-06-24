@@ -7,3 +7,12 @@ export const getProduct = (data) =>
   API.post(`/product/search?page=${data.page}&&size=${data.size}`, data)
 export const addProductToCart = (data) => API.post(`/product/add-to-card`, data)
 export const getCartByUser = (id) => API.get(`/user/get-cart/${id}`)
+export const orderProduct = (data) => API.post(`/product/order`, data)
+export const getListOrder = (data) =>
+  API.post(`/product/get-list-order?page=${data.page}&&size=${data.size}`, data)
+export const getListOrderById = (data) =>
+  API.post(
+    `/product/get-list-order/${data.userId}?page=${data.page}&&size=${data.size}`,
+    data,
+  )
+export const approveOrder = (data) => API.post(`/product/approve-order`, data)

@@ -7,7 +7,7 @@ export const getCartByUser = async (req, res) => {
   try {
     if (req && req.params.userId) {
       const user = await userModel.findById(req.params.userId)
-      res.status(200).json({ data: user.cart })
+      res.status(200).json({ data: user.cart.reverse() })
     } else {
       res.status(404).json({ message: 'Không tìm thấy người dùng' })
     }

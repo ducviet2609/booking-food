@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Drawer, Input } from 'antd'
 import './CardModal.css'
+import { useSnackbar } from 'notistack'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { addProductToCart, clearStateProduct } from '../../action/ProductAction'
 const CardModal = (props) => {
   const { item, openCardModal, setOpenCardModal } = props
   const user = useSelector((state) => state.authReducer.authData)
-
+  const { enqueueSnackbar } = useSnackbar()
+  const handleShowSnackbar = (message, variant = 'success') =>
+    enqueueSnackbar(message, { variant })
   const { isAddToCartSuccess } = useSelector((state) => state.productReducer)
   const dispatch = useDispatch()
 
@@ -15,9 +19,9 @@ const CardModal = (props) => {
     setOpenCardModal(false)
   }
 
-  console.log('isAddToCartSuccess', isAddToCartSuccess)
   useEffect(() => {
     if (isAddToCartSuccess) {
+      handleShowSnackbar('Thêm vào giỏ hàng thành công', 'success')
       setOpenCardModal(false)
     }
   }, [isAddToCartSuccess])

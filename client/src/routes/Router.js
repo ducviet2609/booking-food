@@ -10,13 +10,22 @@ import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
 import { useSelector } from 'react-redux'
+import OrderPage from '../pages/OrderPage'
 
 const Router = () => {
   const user = useSelector((state) => state.authReducer.authData)
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/trang-chu" />} />
-      <Route path="/trang-chu" element={<Home />} />
+      <Route
+        path="/"
+        element={
+          user && user.user.admin ? <Admin /> : <Navigate to="/trang-chu" />
+        }
+      />
+      <Route
+        path="/trang-chu"
+        element={user && user.user.admin ? <Admin /> : <Home />}
+      />
       <Route path="/foods" element={<Foods />} />
       <Route path="/foods/:id" element={<FoodDetails />} />
       <Route path="/dang-ky" element={<Register />} />
@@ -24,8 +33,11 @@ const Router = () => {
       <Route path="/thanh-toan" element={user ? <Checkout /> : <Login />} />
       <Route path="/lien-he" element={<Contact />} />
       <Route path="/gio-hang" element={user ? <CartPage /> : <Login />} />
-
-      <Route path="/admin" element={<Admin />} />
+      <Route path="/don-hang" element={user ? <OrderPage /> : <Login />} />
+      <Route
+        path="/admin"
+        element={user && user.user.admin ? <Admin /> : <Home />}
+      />
     </Routes>
   )
 }

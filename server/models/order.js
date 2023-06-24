@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
-const orderSchema = new moogoose.Schema(
+const orderSchema = new mongoose.Schema(
   {
     userId: { type: String },
-    listProduct: [],
+    listCart: [],
     totalAmount: { type: Number },
     info: {},
     status: { type: String, default: 'waiting' },

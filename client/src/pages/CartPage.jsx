@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Container, Row, Col } from 'reactstrap'
 
 // import { cartActions } from '../store/shopping-cart/CartSlice';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Helmet from '../components/Helmet/Helmet'
 import AppSection from '../components/app-Section/AppSection'
 
@@ -15,9 +15,7 @@ const CartPage = () => {
   const user = useSelector((state) => state.authReducer.authData)
   const { listCart } = useSelector((state) => state.productReducer)
   const cartItems = useSelector((state) => state.cart && state.cart.cartItems)
-  // const totalAmount = useSelector(
-  //   (state) => state.cart && state.cart.totalAmount,
-  // )
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const [orderList, setOrderList] = useState([])
@@ -95,6 +93,19 @@ const CartPage = () => {
     },
   ]
 
+  const handleCheckout = () => {
+    if (orderList.length > 0) {
+      navigate('/thanh-toan', {
+        state: {
+          listProduct: orderList,
+          totalAmount: totalAmount,
+        },
+      })
+    } else {
+      alert('Vui lòng chọn sản phầm rồi thanh toán')
+    }
+  }
+
   return (
     <Helmet title="gio-hang">
       <AppSection title="Giỏ hàng" />
@@ -124,8 +135,11 @@ const CartPage = () => {
                   <button className="addtoCart_btn me-4">
                     <Link to="/foods">Tiếp tục mua hàng</Link>
                   </button>
-                  <button className="addtoCart_btn">
-                    <Link to="/thanh-toan ">Thanh toán đơn hàng</Link>
+                  <button
+                    className="addtoCart_btn"
+                    onClick={() => handleCheckout()}
+                  >
+                    Thanh toán đơn hàng
                   </button>
                   {/* <Button onClick={() => console.log('orderList', orderList)}>
                     Đặt hàng

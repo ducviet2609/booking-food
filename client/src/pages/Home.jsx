@@ -18,6 +18,8 @@ import productCategoryImg03 from '../assets/image/bread.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearStateProduct, getProduct } from '../action/ProductAction.js'
 import Loading from '../components/Loading/Loading.js'
+import { useSnackbar } from 'notistack'
+import { notification } from 'antd'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -25,6 +27,14 @@ const Home = () => {
   const { loading, isAddToCartSuccess } = useSelector(
     (state) => state.productReducer,
   )
+
+  const [api, contextHolder] = notification.useNotification()
+  const openNotificationWithIcon = (type) => {
+    api[type]({
+      message: 'Thêm vào giỏ hàng thành công!',
+      description: 'Hãy vào giỏ hàng để thanh toán hoặc tiếp tục mua sắm',
+    })
+  }
 
   const baseRequest = {
     category: '',
@@ -37,6 +47,7 @@ const Home = () => {
 
   useEffect(() => {
     if (isAddToCartSuccess) {
+      openNotificationWithIcon('success')
       dispatch(
         getProduct({
           ...dataRequest,
@@ -92,6 +103,7 @@ const Home = () => {
 
   return (
     <Helmet title="trang-chu">
+      {contextHolder}
       <section>
         <Container>
           <Row>

@@ -38,7 +38,13 @@ const ProductCard = (props) => {
       </div>
       <div className="product__content">
         <h5>
-          <Link to={`/foods/${_id}`}>{title}</Link>
+          <span
+            onClick={() =>
+              navigate(`/foods/${_id}`, { state: { product: item } })
+            }
+          >
+            {title}
+          </span>
         </h5>
         <div className="d-flex align-items-content justify-content-between ">
           <span className="product__price">{price}đ</span>

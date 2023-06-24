@@ -44,5 +44,49 @@ export const getCartByUser = (id) => async (dispatch) => {
   }
 }
 
+export const orderProduct = (id) => async (dispatch) => {
+  dispatch({ type: 'ORDER_PRODUCT_START' })
+  try {
+    const { data } = await ProductApi.orderProduct(id)
+    dispatch({ type: 'ORDER_PRODUCT_SUCCESS', data: data })
+  } catch (error) {
+    dispatch({ type: 'ORDER_PRODUCT_FAIL' })
+    console.log(error)
+  }
+}
+
+export const getListOrder = (dataRequest) => async (dispatch) => {
+  dispatch({ type: 'GET_LIST_ORDER_START' })
+  try {
+    const { data } = await ProductApi.getListOrder(dataRequest)
+    dispatch({ type: 'GET_LIST_ORDER_SUCCESS', data: data })
+  } catch (error) {
+    dispatch({ type: 'GET_LIST_ORDER_FAIL' })
+    console.log(error)
+  }
+}
+
+export const getListOrderById = (dataRequest) => async (dispatch) => {
+  dispatch({ type: 'GET_LIST_ORDER_BY_ID_START' })
+  try {
+    const { data } = await ProductApi.getListOrderById(dataRequest)
+    dispatch({ type: 'GET_LIST_ORDER_BY_ID_SUCCESS', data: data })
+  } catch (error) {
+    dispatch({ type: 'GET_LIST_ORDER_BY_ID_FAIL' })
+    console.log(error)
+  }
+}
+
+export const approveOrder = (dataRequest) => async (dispatch) => {
+  dispatch({ type: 'APPROVE_ORDER_START' })
+  try {
+    const { data } = await ProductApi.approveOrder(dataRequest)
+    dispatch({ type: 'APPROVE_ORDER_SUCCESS', data: data })
+  } catch (error) {
+    dispatch({ type: 'APPROVE_ORDER_FAIL' })
+    console.log(error)
+  }
+}
+
 export const clearStateProduct = () => (dispatch) =>
   dispatch({ type: 'CLEAR_STATE_PRODUCT' })

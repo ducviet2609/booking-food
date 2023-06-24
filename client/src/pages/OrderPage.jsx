@@ -3,28 +3,44 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   approveOrder,
   clearStateProduct,
-  getListOrder,
-} from '../../action/ProductAction'
-import { Button, Pagination, Table } from 'antd'
-import Loading from '../Loading/Loading'
+  getListOrderById,
+} from '../action/ProductAction'
+import { Button, Pagination, Table, notification } from 'antd'
+import Loading from '../components/Loading/Loading'
 
-const OrderMage = () => {
+const OrderPage = () => {
   const dispatch = useDispatch()
+  const user = useSelector((state) => state.authReducer.authData)
   const listOrder = useSelector((state) => state.productReducer.listOrder)
   const { isApproveSuccess, loading } = useSelector(
     (state) => state.productReducer,
   )
+  const { isOrderSuccess } = useSelector((state) => state.productReducer)
 
+  const [api, contextHolder] = notification.useNotification()
+  const openNotificationWithIcon = (type) => {
+    api[type]({
+      message: 'Đặt hàng thành công',
+      description: 'Kiểm tra trạng thái đơn hàng của bạn tại đây',
+    })
+  }
   const baseRequest = {
+    userId: user.user._id,
     page: 1,
     size: 5,
   }
   const [dataRequest, setDataRquest] = useState(baseRequest)
 
   useEffect(() => {
+    if (isOrderSuccess) {
+      openNotificationWithIcon('success')
+    }
+  }, [isOrderSuccess])
+
+  useEffect(() => {
     if (isApproveSuccess) dispatch(clearStateProduct())
     dispatch(
-      getListOrder({
+      getListOrderById({
         ...dataRequest,
       }),
     )
@@ -33,7 +49,7 @@ const OrderMage = () => {
   useEffect(() => {
     dispatch(clearStateProduct())
     dispatch(
-      getListOrder({
+      getListOrderById({
         ...dataRequest,
       }),
     )
@@ -48,12 +64,7 @@ const OrderMage = () => {
       render: (record) => {
         return (
           <div className="d-flex flex-column">
-            {record &&
-              record.listCart.map((item) => (
-                <span>
-                  {item.title} - {item.number}
-                </span>
-              ))}
+            {record && record.listCart.map((item) => <span>{item.title}</span>)}
           </div>
         )
       },
@@ -92,7 +103,7 @@ const OrderMage = () => {
           return <span className="text-warning">Đang vận chuyển</span>
         }
         if (record.status === 'finish') {
-          return <span className="text-success">Hoàn thành</span>
+          return <span className="text-success">Đã nhận hàng</span>
         }
       },
     },
@@ -105,16 +116,14 @@ const OrderMage = () => {
           <div>
             <div className="d-flex justify-content-center gap-1">
               <Button
-                disabled={
-                  record.status === 'processing' || record.status === 'finish'
-                }
+                disabled={record.status === 'finish'}
                 onClick={() => {
                   dispatch(
-                    approveOrder({ type: 'processing', orderId: record._id }),
+                    approveOrder({ type: 'finish', orderId: record._id }),
                   )
                 }}
               >
-                Chấp nhận
+                Đã nhận hàng
               </Button>
               {/* <Button>Từ chối</Button> */}
             </div>
@@ -131,15 +140,17 @@ const OrderMage = () => {
     }
     setDataRquest(newDataRequest)
     dispatch(
-      getListOrder({
+      getListOrderById({
         ...newDataRequest,
       }),
     )
   }
 
   return (
-    <div className="">
-      <div className="mt-1">
+    <div className="p-3">
+      {contextHolder}
+      <h3>Danh sách đơn hàng</h3>
+      <div className="mt-3">
         <Table
           dataSource={listOrder && listOrder.data}
           columns={columns}
@@ -159,4 +170,4 @@ const OrderMage = () => {
   )
 }
 
-export default OrderMage
+export default OrderPage

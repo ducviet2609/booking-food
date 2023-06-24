@@ -1,12 +1,15 @@
 const productReducer = (
   state = {
     listProduct: {},
+    listOrder: {},
     isCreateProductSucces: false,
     loading: false,
     error: false,
     uploading: false,
     updating: false,
     isAddToCartSuccess: false,
+    isApproveSuccess: false,
+    isOrderSuccess: false,
     listCart: [],
   },
   action,
@@ -62,11 +65,64 @@ const productReducer = (
     case 'GET_CART_BY_USER_FAIL':
       return { loading: false, error: true }
 
+    //  Order
+    case 'ORDER_PRODUCT_START':
+      return { ...state, loading: true, error: false }
+    case 'ORDER_PRODUCT_SUCCESS':
+      return {
+        ...state,
+        isOrderSuccess: true,
+        loading: false,
+        error: false,
+      }
+    case 'ORDER_PRODUCT_FAIL':
+      return { ...state, loading: false, error: true }
+
+    // Get Order
+    case 'GET_LIST_ORDER_START':
+      return { ...state, loading: true, error: false }
+    case 'GET_LIST_ORDER_SUCCESS':
+      return {
+        ...state,
+        listOrder: action.data,
+        loading: false,
+        error: false,
+      }
+    case 'GET_LIST_ORDER_FAIL':
+      return { ...state, loading: false, error: true }
+
+    // Get Order
+    case 'GET_LIST_ORDER_BY_ID_START':
+      return { ...state, loading: true, error: false }
+    case 'GET_LIST_ORDER_BY_ID_SUCCESS':
+      return {
+        ...state,
+        listOrder: action.data,
+        loading: false,
+        error: false,
+      }
+    case 'GET_LIST_ORDER_BY_ID_FAIL':
+      return { ...state, loading: false, error: true }
+
+    // approve order
+    case 'APPROVE_ORDER_START':
+      return { loading: true, error: false }
+    case 'APPROVE_ORDER_SUCCESS':
+      return {
+        isApproveSuccess: true,
+        loading: false,
+        error: false,
+      }
+    case 'APPROVE_ORDER_FAIL':
+      return { loading: false, error: true }
+
     // Clear
     case 'CLEAR_STATE_PRODUCT':
       return {
+        isOrderSuccess: false,
         isCreateProductSucces: false,
         isAddToCartSuccess: false,
+        isApproveSuccess: false,
       }
 
     default:

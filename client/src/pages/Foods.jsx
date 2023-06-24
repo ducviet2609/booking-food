@@ -13,6 +13,7 @@ import '../pages/page-style/paginate.css'
 import { clearStateProduct, getProduct } from '../action/ProductAction.js'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../components/Loading/Loading.js'
+import { notification } from 'antd'
 
 const Foods = () => {
   const dispatch = useDispatch()
@@ -20,6 +21,14 @@ const Foods = () => {
   const { loading, isAddToCartSuccess } = useSelector(
     (state) => state.productReducer,
   )
+
+  const [api, contextHolder] = notification.useNotification()
+  const openNotificationWithIcon = (type) => {
+    api[type]({
+      message: 'Thêm vào giỏ hàng thành công!',
+      description: 'Hãy vào giỏ hàng để thanh toán hoặc tiếp tục mua sắm',
+    })
+  }
 
   const baseRequest = {
     title: '',
@@ -32,6 +41,7 @@ const Foods = () => {
 
   useEffect(() => {
     if (isAddToCartSuccess) {
+      openNotificationWithIcon('success')
       dispatch(
         getProduct({
           ...dataRequest,
@@ -86,6 +96,7 @@ const Foods = () => {
   }
   return (
     <Helmet title="san-pham">
+      {contextHolder}
       <AppSection title="Tất cả sản phẩm" />
 
       <section className="mt-5">

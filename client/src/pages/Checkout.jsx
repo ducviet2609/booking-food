@@ -1,37 +1,54 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Col } from 'reactstrap'
 import AppSection from '../components/app-Section/AppSection'
 import Helmet from '../components/Helmet/Helmet'
 
 import '../pages/page-style/Checkout.css'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { orderProduct } from '../action/ProductAction'
+import { notification } from 'antd'
 
 const Checkout = () => {
-  const [enterName, setEnterName] = useState('')
-  const [enterEmail, setEnterEmail] = useState('')
-  const [enterNumber, setEnterNumber] = useState('')
-  const [enterAddress, setEnterAddress] = useState('')
+  const { state } = useLocation()
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.authReducer.authData)
+  const { isOrderSuccess } = useSelector((state) => state.productReducer)
+  const navigate = useNavigate()
 
-  const shippingInfo = []
-  const cartTotalAmount = useSelector(
-    (state) => state.cart && state.cart.totalAmount,
-  )
+  const baseRequset = {
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+  }
+  const [dataRequest, setDataRequest] = useState(baseRequset)
+
   const shippingCost = 30000
 
-  const totalAmount = cartTotalAmount + Number(shippingCost)
-
-  const submitHandler = (e) => {
-    e.preventDefault()
-    const userShippingAddress = {
-      name: enterName,
-      email: enterEmail,
-      phone: enterNumber,
-      address: enterAddress,
+  useEffect(() => {
+    if (isOrderSuccess) {
+      navigate('/don-hang')
     }
+  }, [isOrderSuccess])
 
-    shippingInfo.push(userShippingAddress)
-    console.log(shippingInfo)
+  const handleChange = (e) => {
+    setDataRequest({
+      ...dataRequest,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const newDataRequest = {
+      info: { ...dataRequest },
+      listCart: state.listProduct,
+      totalAmount: state.totalAmount + shippingCost,
+      userId: user.user._id,
+    }
+    dispatch(orderProduct(newDataRequest))
   }
 
   return (
@@ -42,40 +59,47 @@ const Checkout = () => {
           <Row>
             <Col lg="8" md="6" className="mt-5">
               <h6 className="mb-4">Địa chỉ nhận hàng</h6>
-              <form className="checkout__form" onSubmit={submitHandler}>
+              <form
+                className="checkout__form"
+                onSubmit={(e) => handleSubmit(e)}
+              >
                 <div className="form__group">
                   <input
                     type="text"
+                    name="name"
                     placeholder="Nhập tên của bạn"
                     required
-                    onChange={(e) => setEnterName(e.target.value)}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
 
                 <div className="form__group">
                   <input
                     type="email"
+                    name="email"
                     placeholder="Địa chỉ email"
                     required
-                    onChange={(e) => setEnterEmail(e.target.value)}
-                  />
-                </div>
-
-                <div className="form__group">
-                  <input
-                    type="number"
-                    placeholder="Điện thoại"
-                    required
-                    onChange={(e) => setEnterNumber(e.target.value)}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
 
                 <div className="form__group">
                   <input
                     type="text"
+                    name="phone"
+                    placeholder="Điện thoại"
+                    required
+                    onChange={(e) => handleChange(e)}
+                  />
+                </div>
+
+                <div className="form__group">
+                  <input
+                    type="text"
+                    name="address"
                     placeholder="Địa chỉ"
                     required
-                    onChange={(e) => setEnterAddress(e.target.value)}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
 
@@ -88,15 +112,16 @@ const Checkout = () => {
 
             <Col lg="4" md="6" className="mt-5">
               <div className="checkout_bill">
-                <h6 className="d-flex align-items-center justify-content-between mb-3">
+                {/* <h6 className="d-flex align-items-center justify-content-between mb-3">
                   Subtotal: <span>${cartTotalAmount}</span>
-                </h6>
+                </h6> */}
                 <h6 className="d-flex align-items-center justify-content-between mb-3">
-                  Shipping: <span>{shippingCost}đ</span>
+                  Phí vận chuyển: <span>{shippingCost}VND</span>
                 </h6>
                 <div className="checkout_total">
                   <h5 className="d-flex align-items-center justify-content-between">
-                    Total: <span>{totalAmount}đ</span>
+                    Tổng tiền:{' '}
+                    <span>{state.totalAmount + shippingCost}VND</span>
                   </h5>
                 </div>
               </div>
