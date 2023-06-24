@@ -1,17 +1,31 @@
-import { Button, Pagination, Table } from 'antd'
+import { Button, Pagination, Table, notification } from 'antd'
 import React, { useEffect, useState } from 'react'
 import ModalAddProduct from './ModalAddProduct'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearStateProduct, getProduct } from '../../action/ProductAction'
+import {
+  clearStateProduct,
+  deleteProduct,
+  getProduct,
+} from '../../action/ProductAction'
 import Loading from '../Loading/Loading'
 import ModalEditProduct from './ModalEditProduct'
 
 const ProDuctManage = (props) => {
   const dispatch = useDispatch()
   const listProduct = useSelector((state) => state.productReducer.listProduct)
-  const { isCreateProductSucces, loading } = useSelector(
-    (state) => state.productReducer,
-  )
+  const {
+    isCreateProductSucces,
+    isUpdateProductSucces,
+    isDeleteProductSucces,
+    loading,
+  } = useSelector((state) => state.productReducer)
+  const [api, contextHolder] = notification.useNotification()
+  const openNotificationWithIcon = (type, message, description) => {
+    api[type]({
+      message,
+      description,
+    })
+  }
 
   const baseRequest = {
     page: 1,
@@ -23,14 +37,39 @@ const ProDuctManage = (props) => {
   const [itemProduct, setItemProduct] = useState({})
 
   useEffect(() => {
-    setIsOpenModal(false)
-    dispatch(clearStateProduct())
-    dispatch(
-      getProduct({
-        ...baseRequest,
-      }),
-    )
+    if (isCreateProductSucces) {
+      openNotificationWithIcon('success', 'Thêm mới thành công', '')
+      setIsOpenModal(false)
+      dispatch(clearStateProduct())
+      dispatch(
+        getProduct({
+          ...baseRequest,
+        }),
+      )
+    }
   }, [isCreateProductSucces])
+
+  useEffect(() => {
+    if (isUpdateProductSucces) {
+      openNotificationWithIcon('success', 'Cập nhật thành công', '')
+      dispatch(
+        getProduct({
+          ...baseRequest,
+        }),
+      )
+    }
+  }, [isUpdateProductSucces])
+
+  useEffect(() => {
+    if (isDeleteProductSucces) {
+      openNotificationWithIcon('success', 'Xoá thành công', '')
+      dispatch(
+        getProduct({
+          ...baseRequest,
+        }),
+      )
+    }
+  }, [isDeleteProductSucces])
 
   useEffect(() => {
     dispatch(clearStateProduct())
@@ -109,7 +148,13 @@ const ProDuctManage = (props) => {
               >
                 Sửa
               </Button>
-              <Button>Xóa</Button>
+              <Button
+                onClick={() =>
+                  dispatch(deleteProduct({ productId: record._id }))
+                }
+              >
+                Xóa
+              </Button>
             </div>
           </div>
         )
@@ -132,6 +177,7 @@ const ProDuctManage = (props) => {
 
   return (
     <div className="">
+      {contextHolder}
       <div>
         <Button type="primary" onClick={() => openModal()}>
           Thêm sản phẩm

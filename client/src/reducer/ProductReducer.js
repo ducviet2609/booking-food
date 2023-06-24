@@ -3,6 +3,8 @@ const productReducer = (
     listProduct: {},
     listOrder: {},
     isCreateProductSucces: false,
+    isUpdateProductSucces: false,
+    isDeleteProductSucces: false,
     loading: false,
     error: false,
     uploading: false,
@@ -26,6 +28,32 @@ const productReducer = (
         error: false,
       }
     case 'CREATE_PRODUCT_FAIL':
+      return { ...state, loading: false, error: true }
+
+    // Update Product
+    case 'UPDATE_PRODUCT_START':
+      return { ...state, loading: true, error: false }
+    case 'UPDATE_PRODUCT_SUCCESS':
+      return {
+        ...state,
+        loading: false,
+        isUpdateProductSucces: true,
+        error: false,
+      }
+    case 'UPDATE_PRODUCT_FAIL':
+      return { ...state, loading: false, error: true }
+
+    // Delete Product
+    case 'DELETE_PRODUCT_START':
+      return { ...state, loading: true, error: false }
+    case 'DELETE_PRODUCT_SUCCESS':
+      return {
+        ...state,
+        loading: false,
+        isDeleteProductSucces: true,
+        error: false,
+      }
+    case 'DELETE_PRODUCT_FAIL':
       return { ...state, loading: false, error: true }
 
     // Get Product
@@ -120,7 +148,9 @@ const productReducer = (
     case 'CLEAR_STATE_PRODUCT':
       return {
         isOrderSuccess: false,
+        isDeleteProductSucces: false,
         isCreateProductSucces: false,
+        isUpdateProductSucces: false,
         isAddToCartSuccess: false,
         isApproveSuccess: false,
       }

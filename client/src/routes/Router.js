@@ -26,8 +26,14 @@ const Router = () => {
         path="/trang-chu"
         element={user && user.user.admin ? <Admin /> : <Home />}
       />
-      <Route path="/foods" element={<Foods />} />
-      <Route path="/foods/:id" element={<FoodDetails />} />
+      <Route
+        path="/foods"
+        element={user && user.user.admin ? <Admin /> : <Foods />}
+      />
+      <Route
+        path="/foods/:id"
+        element={user && user.user.admin ? <Admin /> : <FoodDetails />}
+      />
       <Route path="/dang-ky" element={<Register />} />
       <Route path="/dang-nhap" element={<Login />} />
       <Route path="/thanh-toan" element={user ? <Checkout /> : <Login />} />

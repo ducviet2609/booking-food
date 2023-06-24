@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux'
 const Admin = () => {
   const dispatch = useDispatch()
   const [tabPosition, setTabPosition] = useState('left')
+
   const changeTabPosition = (e) => {
     setTabPosition(e.target.value)
   }

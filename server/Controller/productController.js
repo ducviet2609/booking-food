@@ -34,6 +34,36 @@ export const createProduct = async (req, res) => {
   }
 }
 
+// Update Produuct
+export const updateProduct = async (req, res) => {
+  const { productId, title, description, price, number, category } = req.body
+  try {
+    // const newProduct = new productModel(req.body)
+    const product = await productModel.findByIdAndUpdate(
+      productId,
+      { title, description, price, number, category },
+      { new: true },
+    )
+    // await newProduct.save()
+    res.status(200).json({ status: 1 })
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+// Delete Produuct
+export const deleteProduct = async (req, res) => {
+  const { productId } = req.body
+  try {
+    // const newProduct = new productModel(req.body)
+    await productModel.findByIdAndDelete(productId)
+    // await newProduct.save()
+    res.status(200).json({ status: 1 })
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 // get product
 export const getProduct = async (req, res) => {
   const { title, category } = req.body

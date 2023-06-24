@@ -11,6 +11,28 @@ export const createProduct = (dataRequest) => async (dispatch) => {
   }
 }
 
+export const updateProduct = (dataRequest) => async (dispatch) => {
+  dispatch({ type: 'UPDATE_PRODUCT_START' })
+  try {
+    const { data } = await ProductApi.updateProduct(dataRequest)
+    dispatch({ type: 'UPDATE_PRODUCT_SUCCESS', data: data })
+  } catch (error) {
+    dispatch({ type: 'UPDATE_PRODUCT_FAIL' })
+    console.log(error)
+  }
+}
+
+export const deleteProduct = (dataRequest) => async (dispatch) => {
+  dispatch({ type: 'DELETE_PRODUCT_START' })
+  try {
+    const { data } = await ProductApi.deleteProduct(dataRequest)
+    dispatch({ type: 'DELETE_PRODUCT_SUCCESS', data: data })
+  } catch (error) {
+    dispatch({ type: 'DELETE_PRODUCT_FAIL' })
+    console.log(error)
+  }
+}
+
 export const getProduct = (dataRequest) => async (dispatch) => {
   dispatch({ type: 'GET_PRODUCT_START' })
   try {

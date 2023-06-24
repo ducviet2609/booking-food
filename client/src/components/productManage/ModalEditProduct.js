@@ -1,21 +1,32 @@
 import { Input, Modal, Select } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { clearStateProduct, updateProduct } from '../../action/ProductAction'
 
 const ModalEditProduct = (props) => {
   const { isOpenModalEdit, setIsOpenModalEdit, itemProduct } = props
 
   const dispatch = useDispatch()
   const loading = useSelector((state) => state.productReducer.loading)
+  const { isUpdateProductSucces } = useSelector((state) => state.productReducer)
 
   const [dataRequest, setDataRquest] = useState({
+    productId: itemProduct._id,
     title: itemProduct.title || '',
-    image: itemProduct.image || null,
+    // image: itemProduct.image || null,
     description: itemProduct.description || '',
     price: itemProduct.price || '',
     number: itemProduct.number || 0,
     category: itemProduct.category || 'food',
   })
+
+  useEffect(() => {
+    if (isUpdateProductSucces) {
+      handleCancel()
+      dispatch(clearStateProduct())
+    }
+  }, [isUpdateProductSucces])
+
   const handleCancel = () => {
     setIsOpenModalEdit(false)
   }
@@ -49,7 +60,7 @@ const ModalEditProduct = (props) => {
 
   // hàm call api tạo sản phẩm
   const handleCreateProduct = () => {
-    // dispatch(createProduct(dataRequest))
+    dispatch(updateProduct(dataRequest))
   }
 
   return (
