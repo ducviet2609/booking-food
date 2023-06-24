@@ -8,16 +8,29 @@ import Helmet from '../components/Helmet/Helmet'
 import AppSection from '../components/app-Section/AppSection'
 
 import '../pages/page-style/CartPage.css'
-import { getCartByUser } from '../action/ProductAction'
-import { Button, Checkbox, Table } from 'antd'
+import {
+  clearStateProduct,
+  deleteProductOnCart,
+  getCartByUser,
+} from '../action/ProductAction'
+import { Button, Checkbox, Table, notification } from 'antd'
 import Loading from '../components/Loading/Loading'
 
 const CartPage = () => {
   const user = useSelector((state) => state.authReducer.authData)
-  const { listCart, loading } = useSelector((state) => state.productReducer)
+  const { listCart, loading, isDeleteOnCartSuccess } = useSelector(
+    (state) => state.productReducer,
+  )
   const cartItems = useSelector((state) => state.cart && state.cart.cartItems)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [api, contextHolder] = notification.useNotification()
+  const openNotificationWithIcon = (type, message, description) => {
+    api[type]({
+      message,
+      description,
+    })
+  }
 
   const [orderList, setOrderList] = useState([])
   const [totalAmount, setToTalAmount] = useState(0)
@@ -26,6 +39,14 @@ const CartPage = () => {
       dispatch(getCartByUser(user.user._id))
     }
   }, [user])
+
+  useEffect(() => {
+    if (isDeleteOnCartSuccess) {
+      openNotificationWithIcon('success', 'Xoá thành công', '')
+      dispatch(getCartByUser(user.user._id))
+      dispatch(clearStateProduct())
+    }
+  }, [isDeleteOnCartSuccess])
 
   const handleChecked = (e, record) => {
     let newOrderList = orderList
@@ -86,7 +107,18 @@ const CartPage = () => {
               >
                 Sửa
               </Button> */}
-              <Button>Xóa</Button>
+              <Button
+                onClick={() =>
+                  dispatch(
+                    deleteProductOnCart({
+                      cartId: record.id,
+                      userId: user.user._id,
+                    }),
+                  )
+                }
+              >
+                Xóa
+              </Button>
             </div>
           </div>
         )
@@ -109,6 +141,7 @@ const CartPage = () => {
 
   return (
     <Helmet title="gio-hang">
+      {contextHolder}
       <AppSection title="Giỏ hàng" />
       <section className="mt-5">
         <Container>

@@ -139,6 +139,31 @@ export const addProductToCart = async (req, res) => {
   }
 }
 
+// Xoá khỏi giỏ hàng
+export const deleteProductOnCart = async (req, res) => {
+  const { cartId, userId } = req.body
+  try {
+    const user = await userModel.findById(userId)
+    const cart = user.cart.find((item) => item.id === cartId)
+    await user.updateOne({
+      $pull: {
+        cart: {
+          id: cartId,
+          productId: cart.productId,
+          title: cart.title,
+          number: cart.number,
+          price: cart.price,
+        },
+      },
+    })
+    const product = await productModel.findById(cart.productId)
+    await product.updateOne({ number: product.number + cart.number })
+    res.status(200).json({ status: 1 })
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 // Order sản phẩm
 export const orderProduct = async (req, res) => {
   const { listCart, userId } = req.body

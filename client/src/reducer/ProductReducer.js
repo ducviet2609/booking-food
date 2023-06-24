@@ -10,6 +10,7 @@ const productReducer = (
     uploading: false,
     updating: false,
     isAddToCartSuccess: false,
+    isDeleteOnCartSuccess: false,
     isApproveSuccess: false,
     isOrderSuccess: false,
     listCart: [],
@@ -81,6 +82,18 @@ const productReducer = (
     case 'ADD_PRODUCT_TO_CART_FAIL':
       return { loading: false, error: true }
 
+    // Delete product on cart
+    case 'DELETE_PRODUCT_ON_CART_START':
+      return { loading: true, error: false }
+    case 'DELETE_PRODUCT_ON_CART_SUCCESS':
+      return {
+        isDeleteOnCartSuccess: true,
+        loading: false,
+        error: false,
+      }
+    case 'DELETE_PRODUCT_ON_CART_FAIL':
+      return { loading: false, error: true }
+
     // get cart
     case 'GET_CART_BY_USER_START':
       return { loading: true, error: false }
@@ -147,6 +160,7 @@ const productReducer = (
     // Clear
     case 'CLEAR_STATE_PRODUCT':
       return {
+        isDeleteOnCartSuccess: false,
         isOrderSuccess: false,
         isDeleteProductSucces: false,
         isCreateProductSucces: false,

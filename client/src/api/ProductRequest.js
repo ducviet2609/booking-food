@@ -7,7 +7,9 @@ export const updateProduct = (data) => API.post('/product/update-product', data)
 export const deleteProduct = (data) => API.post('/product/delete-product', data)
 export const getProduct = (data) =>
   API.post(`/product/search?page=${data.page}&&size=${data.size}`, data)
-export const addProductToCart = (data) => API.post(`/product/add-to-card`, data)
+export const addProductToCart = (data) => API.post(`/product/add-to-cart`, data)
+export const deleteProductOnCart = (data) =>
+  API.post(`/product/delete-on-cart`, data)
 export const getCartByUser = (id) => API.get(`/user/get-cart/${id}`)
 export const orderProduct = (data) => API.post(`/product/order`, data)
 export const getListOrder = (data) =>

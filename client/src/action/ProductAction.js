@@ -55,6 +55,17 @@ export const addProductToCart = (dataRequest) => async (dispatch) => {
   }
 }
 
+export const deleteProductOnCart = (dataRequest) => async (dispatch) => {
+  dispatch({ type: 'DELETE_PRODUCT_ON_CART_START' })
+  try {
+    const { data } = await ProductApi.deleteProductOnCart(dataRequest)
+    dispatch({ type: 'DELETE_PRODUCT_ON_CART_SUCCESS', data: data })
+  } catch (error) {
+    dispatch({ type: 'DELETE_PRODUCT_ON_CART_FAIL' })
+    console.log(error)
+  }
+}
+
 export const getCartByUser = (id) => async (dispatch) => {
   dispatch({ type: 'GET_CART_BY_USER_START' })
   try {
