@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Drawer, Input } from 'antd'
+import { Button, Drawer } from 'antd'
 import './CardModal.css'
 import { useSnackbar } from 'notistack'
 
@@ -78,12 +78,6 @@ const CardModal = (props) => {
         </div>
         <div className="d-flex justify-content-center align-items-center mt-3 gap-2">
           <Button onClick={() => handleChangeNumber('subtraction')}>-</Button>
-          {/* <Input
-            type="number"
-            value={numberProduct}
-            min={1}
-            max={item.number}
-          /> */}
           <strong className="mr-2 ml-2">{numberProduct}</strong>
           <Button onClick={() => handleChangeNumber('plus')}>+</Button>
         </div>

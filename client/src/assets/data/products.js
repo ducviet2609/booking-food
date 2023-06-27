@@ -20,7 +20,7 @@ const products = [
     image03: product_02_image_03,
     category: 'Đồ ăn',
 
-    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque.',
+    desc: ' ',
   },
 
   {
@@ -32,7 +32,7 @@ const products = [
     image03: product_03_image_03,
     category: 'Đồ ăn',
 
-    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque.',
+    desc: ' ',
   },
 
   {
@@ -44,7 +44,7 @@ const products = [
     image03: product_04_image_03,
     category: 'Đồ ăn',
 
-    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque.',
+    desc: '',
   },
 
   {
@@ -56,7 +56,7 @@ const products = [
     image03: product_02_image_03,
     category: 'Bánh',
 
-    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque.',
+    desc: 'Cánh gà chiên mắm',
   },
 
   {
@@ -68,7 +68,7 @@ const products = [
     image03: product_03_image_03,
     category: 'Đồ ăn',
 
-    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque.',
+    desc: '',
   },
 
   {
@@ -80,7 +80,7 @@ const products = [
     image03: product_04_image_03,
     category: 'Đồ uống',
 
-    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque.',
+    desc: '',
   },
 
   {
@@ -91,7 +91,7 @@ const products = [
 
     category: 'Bánh',
 
-    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque.',
+    desc: ' ',
   },
 
   {
@@ -103,30 +103,7 @@ const products = [
     image03: product_04_image_03,
     category: 'Món chay',
 
-    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque.',
-  },
-
-  {
-    id: '09',
-    title: 'Pizza With Mushroom',
-    price: 110000,
-    image01: product_04_image_02,
-    image02: product_04_image_01,
-    image03: product_04_image_03,
-    category: 'Món chay',
-
-    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque.',
-  },
-  {
-    id: '10',
-    title: 'Bánh mỳ',
-    price: 110000,
-    image01: product_04_image_02,
-    image02: product_04_image_01,
-    image03: product_04_image_03,
-    category: 'Món chay',
-
-    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque.',
+    desc: ' ',
   },
 ]
 

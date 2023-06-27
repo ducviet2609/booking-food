@@ -1,5 +1,4 @@
 import * as AuthApi from '../api/AuthRequest.js'
-import axios from 'axios'
 
 export const logIn = (formData) => async (dispatch) => {
   dispatch({ type: 'AUTH_START' })

@@ -1,16 +1,13 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { Container, Col, Row } from 'reactstrap'
-import Helmet from '../components/Helmet/Helmet'
-import AppSection from '../components/app-Section/AppSection'
+import { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-import { useDispatch, useSelector } from 'react-redux'
-import ProductCard from '../components/product-card/ProductCard'
+import { useSelector } from 'react-redux'
+// import ProductCard from '../components/product-card/ProductCard'
 // import cartActions from '../store/shopping-cart/CartSlice'
-import products from '../assets/data/products'
+// import products from '../assets/data/products'
 import '../pages/page-style/FoodDetails.css'
-import { Button, Input, Tabs } from 'antd'
+import { Button, Input } from 'antd'
 import CardModal from '../components/CardModal/CardModal'
 
 const FoodDetails = () => {
@@ -19,31 +16,7 @@ const FoodDetails = () => {
   const navigate = useNavigate()
   const [openCardModal, setOpenCardModal] = useState(false)
 
-  // const product = products.find((product) => product.id === id)
-  // const [previewImg, setPreviewImg] = useState(product.image01)
-  // const { title, price, category, desc, image01 } = product
-
-  // const relatedProduct = products.filter((item) => category === item.category) // same category product
-
   console.log(state)
-  // const addItem = () => {
-  //   dispatch(
-  //     cartActions.addItem({
-  //       id,
-  //       title,
-  //       price,
-  //       image01,
-  //     })
-  //   );
-  // };
-
-  // useEffect(() => {
-  //   // setPreviewImg(product.image01)
-  // }, [product])
-
-  // useEffect(() => {
-  //   window.scrollTo(0, 0)
-  // }, [product])
 
   const handleGetCategory = (category) => {
     if (category === 'food') {

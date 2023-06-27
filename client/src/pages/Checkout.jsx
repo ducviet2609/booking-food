@@ -116,12 +116,11 @@ const Checkout = () => {
                   Subtotal: <span>${cartTotalAmount}</span>
                 </h6> */}
                 <h6 className="d-flex align-items-center justify-content-between mb-3">
-                  Phí vận chuyển: <span>{shippingCost}VND</span>
+                  Phí vận chuyển: <span>{shippingCost}đ</span>
                 </h6>
                 <div className="checkout_total">
                   <h5 className="d-flex align-items-center justify-content-between">
-                    Tổng tiền:{' '}
-                    <span>{state.totalAmount + shippingCost}VND</span>
+                    Tổng tiền: <span>{state.totalAmount + shippingCost}đ</span>
                   </h5>
                 </div>
               </div>

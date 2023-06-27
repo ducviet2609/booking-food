@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-// import { cartActions } from '../../store/shopping-cart/CartSlice'
 
 import '../product-card/ProductCard.css'
 import CardModal from '../CardModal/CardModal'
@@ -12,17 +11,8 @@ const ProductCard = (props) => {
 
   const user = useSelector((state) => state.authReducer.authData)
   const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const [openCardModal, setOpenCardModal] = useState(false)
 
-  // const addtoCart= () =>{
-  //   dispatch(cartActions.addItem({
-  //     id,
-  //     title,
-  //     image01,
-  //     price
-  //   }))
-  // }
+  const [openCardModal, setOpenCardModal] = useState(false)
 
   const handleAddCart = () => {
     if (!user) {

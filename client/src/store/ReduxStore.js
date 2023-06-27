@@ -25,6 +25,8 @@ function loadFromLocalStorage() {
     return undefined
   }
 }
+
+// duy trì state khi f5 trang
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const persistedState = loadFromLocalStorage()
 

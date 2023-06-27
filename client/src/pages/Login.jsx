@@ -3,16 +3,19 @@ import Helmet from '../components/Helmet/Helmet'
 import AppSection from '../components/app-Section/AppSection'
 import { Container, Row, Col } from 'reactstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { useRef } from 'react'
 
 import '../pages/page-style/Login.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { logIn } from '../action/AuthAction'
 import Loading from '../components/Loading/Loading'
+
 const Login = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.authReducer.authData)
-  const { loading } = useSelector((state) => state.authReducer)
+
+  const { loading, errMessage, isAuthSuccess } = useSelector(
+    (state) => state.authReducer,
+  )
   const navigate = useNavigate()
 
   const baseRequest = {

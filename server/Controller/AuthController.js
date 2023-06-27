@@ -20,6 +20,7 @@ export const registerUser = async (req, res) => {
     const { password, ...user } = userRegister._doc
     res.status(200).json({ user })
   } catch (error) {
+    alert('')
     res.status(500).json({ message: error.message })
   }
 }

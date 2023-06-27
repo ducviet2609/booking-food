@@ -2,7 +2,7 @@ import { Radio, Space, Tabs } from 'antd'
 import { useState } from 'react'
 import OrderMage from '../components/OrderManage/OrderMage'
 import ProDuctManage from '../components/productManage/ProDuctManage'
-import RevenueManage from '../components/revenueManage/RevenueManage'
+
 import { getListOrder, getProduct } from '../action/ProductAction'
 import { useDispatch } from 'react-redux'
 

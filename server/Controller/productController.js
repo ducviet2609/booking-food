@@ -34,7 +34,7 @@ export const createProduct = async (req, res) => {
   }
 }
 
-// Update Produuct
+// Update Product
 export const updateProduct = async (req, res) => {
   const { productId, title, description, price, number, category } = req.body
   try {
@@ -51,7 +51,7 @@ export const updateProduct = async (req, res) => {
   }
 }
 
-// Delete Produuct
+// Delete Product
 export const deleteProduct = async (req, res) => {
   const { productId } = req.body
   try {

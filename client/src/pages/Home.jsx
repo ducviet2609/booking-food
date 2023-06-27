@@ -18,7 +18,6 @@ import productCategoryImg03 from '../assets/image/bread.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearStateProduct, getProduct } from '../action/ProductAction.js'
 import Loading from '../components/Loading/Loading.js'
-import { useSnackbar } from 'notistack'
 import { notification } from 'antd'
 
 const Home = () => {
@@ -39,10 +38,10 @@ const Home = () => {
   const baseRequest = {
     category: '',
     page: 1,
-    size: 16,
+    size: 8,
   }
   const [category, setCategory] = useState('Tất cả')
-  // const [allProducts, setallProducts] = useState(products)
+
   const [dataRequest, setDataRquest] = useState(baseRequest)
 
   useEffect(() => {
@@ -76,30 +75,6 @@ const Home = () => {
       }),
     )
   }
-  // useEffect(()=>{
-  //   if(category === 'Tất cả'){
-  //     setallProducts(products)
-  //   }
-
-  //   if(category=== 'Đồ ăn'){
-  //     const filteredProducts = products.filter(item =>item.category=== 'Đồ ăn')
-  //     setallProducts(filteredProducts)
-  //   }
-  //   if(category=== 'Bánh'){
-  //     const filteredProducts = products.filter(item =>item.category=== 'Bánh')
-  //     setallProducts(filteredProducts)
-  //   }
-
-  //   if(category=== 'Món chay'){
-  //     const filteredProducts = products.filter(item =>item.category=== 'Món chay')
-  //     setallProducts(filteredProducts)
-  //   }
-
-  //   if(category=== 'Đồ uống'){
-  //     const filteredProducts = products.filter(item =>item.category=== 'Đồ uống')
-  //     setallProducts(filteredProducts)
-  //   }
-  // },[category])
 
   return (
     <Helmet title="trang-chu">

@@ -4,7 +4,6 @@ import AppSection from '../components/app-Section/AppSection'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Col } from 'reactstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { useRef } from 'react'
 
 import '../pages/page-style/Login.css'
 import { signUp } from '../action/AuthAction'
@@ -17,7 +16,7 @@ const Register = () => {
     email: '',
     password: '',
   }
-  const [dataRequest, setDateRequest] = useState(baseRequest)  
+  const [dataRequest, setDateRequest] = useState(baseRequest)
 
   useEffect(() => {
     if (user) {

@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import '../Header/Header.css'
 import { Button } from 'antd'
 import { logOut } from '../../action/AuthAction'
-// import { cartUiActions } from '../../store/shopping-cart/cartUISlice'
 
 const Header = () => {
   const menuRef = useRef(null)
@@ -19,9 +18,6 @@ const Header = () => {
   )
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  // const toggleCart = () => {
-  //   dispatch(cartUiActions.toggle());
-  // };
 
   const nav_link = [
     {
@@ -49,7 +45,7 @@ const Header = () => {
   const nav_link_admin = [
     {
       path: '/admin',
-      display: 'Quản Lý',
+      display: '',
     },
   ]
 

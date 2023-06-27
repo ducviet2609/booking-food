@@ -1,7 +1,7 @@
 import Helmet from '../components/Helmet/Helmet'
 import { Link } from 'react-router-dom'
 import AppSection from '../components/app-Section/AppSection'
-import { Container, Row, Col } from 'reactstrap'
+import { Container } from 'reactstrap'
 import '../pages/page-style/Contact.css'
 import contactbgImg from '../assets/image/contact_background.jpg'
 

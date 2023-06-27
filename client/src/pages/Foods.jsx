@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Container, Row, Col } from 'reactstrap'
-import ReactPaginate from 'react-paginate'
+
 import Helmet from '../components/Helmet/Helmet.js'
 import AppSection from '../components/app-Section/AppSection'
 
-import products from '../assets/data/products'
 import ProductCard from '../components/product-card/ProductCard'
 
 import '../pages/page-style/Foods.css'
@@ -33,11 +32,10 @@ const Foods = () => {
   const baseRequest = {
     title: '',
     page: 1,
-    size: 8,
+    size: 16,
   }
   const [searchItem, setsearchItem] = useState('')
   const [dataRequest, setDataRquest] = useState(baseRequest)
-  const [pageNumber, setPageNumber] = useState(0)
 
   useEffect(() => {
     if (isAddToCartSuccess) {
@@ -59,26 +57,6 @@ const Foods = () => {
     )
   }, [])
 
-  // const searchedProduct = products.filter((item) => {
-  //   if (searchItem.value === '') {
-  //     return item
-  //   }
-  //   if (item.title.toLowerCase().includes(searchItem.toLowerCase())) {
-  //     return item
-  //   } else {
-  //     return console.log('not found')
-  //   }
-  // })
-
-  // const productPerPage = 8
-  // const visitedPage = pageNumber * productPerPage
-  // const displayPage = searchedProduct.slice(
-  //   visitedPage,
-  //   visitedPage + productPerPage,
-  // )
-
-  // const pageCount = Math.ceil(searchedProduct.length / productPerPage)
-
   const handleSearch = () => {
     const newDataRequest = {
       ...dataRequest,
@@ -91,9 +69,6 @@ const Foods = () => {
     )
   }
 
-  const changePage = ({ selected }) => {
-    setPageNumber(selected)
-  }
   return (
     <Helmet title="san-pham">
       {contextHolder}

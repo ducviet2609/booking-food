@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Modal, Input, Select } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { createProduct } from '../../action/ProductAction'
