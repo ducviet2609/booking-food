@@ -9,9 +9,9 @@ export const registerUser = async (req, res) => {
   req.body.password = hashedPass
   //Create new document
   const newUser = new userModel(req.body)
-  const { username } = req.body
+  const { email } = req.body
   try {
-    const oldUser = await userModel.findOne({ username })
+    const oldUser = await userModel.findOne({ email })
     // Check username already
     if (oldUser) {
       return res.status(400).json('Người dùng đã tồn tại')

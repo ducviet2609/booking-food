@@ -25,6 +25,10 @@ export const signUp = (formData) => async (dispatch) => {
   }
 }
 
+export const clearAuthState = () => async (dispatch) => {
+  dispatch({ type: 'CLEAR_AUTH_STATE' })
+}
+
 export const logOut = () => async (dispatch) => {
   dispatch({ type: 'LOG_OUT' })
 }

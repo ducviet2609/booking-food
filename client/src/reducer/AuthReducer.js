@@ -41,6 +41,10 @@ const authReducer = (
     // Log Out
     case 'LOG_OUT':
       return { ...state, authData: null, loading: false, error: false }
+
+    //clear
+    case 'CLEAR_AUTH_STATE':
+      return { ...state, errMessage: '', loading: false, error: false }
     default:
       return state
   }

@@ -6,18 +6,24 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import '../pages/page-style/Login.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { logIn } from '../action/AuthAction'
+import { clearAuthState, logIn } from '../action/AuthAction'
 import Loading from '../components/Loading/Loading'
+import { notification } from 'antd'
 
 const Login = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.authReducer.authData)
 
-  const { loading, errMessage, isAuthSuccess } = useSelector(
-    (state) => state.authReducer,
-  )
+  const { loading, errMessage } = useSelector((state) => state.authReducer)
   const navigate = useNavigate()
-
+  const [api, contextHolder] = notification.useNotification()
+  const openNotificationWithIcon = (type, message, description) => {
+    api[type]({
+      message,
+      description,
+    })
+  }
+  // console.log(errMessage)
   const baseRequest = {
     email: '',
     password: '',
@@ -29,6 +35,13 @@ const Login = () => {
       navigate('/trang-chu')
     }
   }, [user])
+
+  useEffect(() => {
+    if (errMessage) {
+      openNotificationWithIcon('error', errMessage, '')
+      dispatch(clearAuthState())
+    }
+  }, [errMessage])
 
   const handleChange = (e) => {
     setDataRequest({
@@ -43,6 +56,7 @@ const Login = () => {
   }
   return (
     <Helmet>
+      {contextHolder}
       <AppSection />
       <section>
         <Container className="login_login">
