@@ -205,7 +205,7 @@ export const orderProduct = async (req, res) => {
       }
     }
     await user.updateOne({ cart: tempArray })
-    res.status(200).json({ stauts: 1 })
+    res.status(200).json({ status: 1 })
   } catch (error) {
     res.status(500).json(error)
   }

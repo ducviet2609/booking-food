@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Container, Row, Col } from 'reactstrap'
 
-// import { cartActions } from '../store/shopping-cart/CartSlice';
 import { Link, useNavigate } from 'react-router-dom'
 import Helmet from '../components/Helmet/Helmet'
 import AppSection from '../components/app-Section/AppSection'
@@ -25,6 +24,7 @@ const CartPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [api, contextHolder] = notification.useNotification()
+
   const openNotificationWithIcon = (type, message, description) => {
     api[type]({
       message,
@@ -186,32 +186,6 @@ const CartPage = () => {
       </section>
       <Loading isLoading={loading} />
     </Helmet>
-  )
-}
-
-const Tr = (props) => {
-  const { id, image01, title, price, quantity } = props.item
-  const dispatch = useDispatch()
-
-  // const deleteItem =()=>{
-  //   dispatch(cartActions.deleteItem(id))
-  // }
-  return (
-    <tr>
-      <td className="text-center cart_page_img_box">
-        <img src={image01} alt="" />
-      </td>
-      <td className="text-center">{title}</td>
-      <td className="text-center">{price}đ</td>
-      <td className="text-center">{quantity}</td>
-
-      <td className="text-center cartpage_delete_btn">
-        <i
-          class="ri-delete-bin-line"
-          // onClick={deleteItem}
-        ></i>
-      </td>
-    </tr>
   )
 }
 

@@ -132,7 +132,7 @@ const productReducer = (
     case 'GET_LIST_ORDER_FAIL':
       return { ...state, loading: false, error: true }
 
-    // Get Order
+    // Get Order by ID
     case 'GET_LIST_ORDER_BY_ID_START':
       return { ...state, loading: true, error: false }
     case 'GET_LIST_ORDER_BY_ID_SUCCESS':

@@ -1,6 +1,5 @@
 import userModel from '../models/userModel.js'
 import bcrypt from 'bcrypt'
-import crypto from 'crypto'
 
 export const registerUser = async (req, res) => {
   // hash password before save

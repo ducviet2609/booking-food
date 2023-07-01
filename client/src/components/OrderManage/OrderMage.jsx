@@ -68,7 +68,7 @@ const OrderMage = () => {
           <div className="d-flex flex-column">
             <span>Tên: {record.info.name}</span>
             <span>Email: {record.info.emmail}</span>
-            <span>SDT: {record.info.phone}</span>
+            <span>SĐT: {record.info.phone}</span>
             <span>Địa chỉ: {record.info.address}</span>
           </div>
         )
