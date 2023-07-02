@@ -118,22 +118,24 @@ export const getProduct = async (req, res) => {
 export const addProductToCart = async (req, res) => {
   const { productId, userId, title, number, price } = req.body
   try {
-    const user = await userModel.findById(userId)
-    // thêm id sản phẩm vào trường cart
-    const newUser = await user.updateOne({
-      $push: {
-        cart: {
-          id: uuid(),
-          productId: productId,
-          title: title,
-          number: number,
-          price: price,
-        },
-      },
-    })
     const product = await productModel.findById(productId)
-    await product.updateOne({ number: product.number - number })
-    res.status(200).json({ status: 1 })
+    if (product.number > number) {
+      const user = await userModel.findById(userId)
+      // thêm id sản phẩm vào trường cart
+      const newUser = await user.updateOne({
+        $push: {
+          cart: {
+            id: uuid(),
+            productId: productId,
+            title: title,
+            number: number,
+            price: price,
+          },
+        },
+      })
+      await product.updateOne({ number: product.number - number })
+      res.status(200).json({ status: 1 })
+    } else res.status(400).json('Số lượng trong kho không đủ')
   } catch (error) {
     res.status(500).json(error)
   }

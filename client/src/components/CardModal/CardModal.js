@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Drawer } from 'antd'
+import { Button, Drawer, notification } from 'antd'
 import './CardModal.css'
 import { useSnackbar } from 'notistack'
 
@@ -13,8 +13,14 @@ const CardModal = (props) => {
     enqueueSnackbar(message, { variant })
   const { isAddToCartSuccess } = useSelector((state) => state.productReducer)
   const dispatch = useDispatch()
-
-  const [numberProduct, setNumberProduct] = useState(1)
+  const [api, contextHolder] = notification.useNotification()
+  const openNotificationWithIcon = (type, message, description) => {
+    api[type]({
+      message,
+      description,
+    })
+  }
+  const [numberProduct, setNumberProduct] = useState(0)
   const handleClose = () => {
     setOpenCardModal(false)
   }
@@ -31,7 +37,7 @@ const CardModal = (props) => {
       if (numberProduct > 1) {
         return setNumberProduct((prev) => prev - 1)
       }
-      return setNumberProduct(1)
+      return setNumberProduct(0)
     }
     if (type === 'plus') {
       if (numberProduct < item.number) {
@@ -42,14 +48,21 @@ const CardModal = (props) => {
   }
 
   const handleAddtoCart = () => {
-    const newDataRequest = {
-      title: item.title,
-      productId: item._id,
-      userId: user.user._id,
-      number: numberProduct,
-      price: item.price,
-    }
-    dispatch(addProductToCart(newDataRequest))
+    if (numberProduct > 0) {
+      const newDataRequest = {
+        title: item.title,
+        productId: item._id,
+        userId: user.user._id,
+        number: numberProduct,
+        price: item.price,
+      }
+      dispatch(addProductToCart(newDataRequest))
+    } else
+      openNotificationWithIcon(
+        'error',
+        'Vui lòng chọn số lượng sản phẩm trước khi thêm vào giỏ hàng',
+        '',
+      )
   }
 
   return (
@@ -59,6 +72,7 @@ const CardModal = (props) => {
       onClose={() => handleClose()}
       open={openCardModal}
     >
+      {contextHolder}
       <div className="d-flex flex-column h-100">
         <div className="card-icon d-flex flex-column justify-content-center">
           <div className="card-image d-flex justify-content-center">
@@ -72,8 +86,13 @@ const CardModal = (props) => {
               Giá tiền: <b>{item.price}đ</b>
             </span>
             <span>
-              Số lượng trong kho: <b>{item.number}</b>
+              Số lượng trong kho: <b>{item.number}</b>{' '}
             </span>
+          </div>
+          <div className="d-flex justify-content-center">
+            {item.number === 0 && (
+              <span className="text-danger fw-bold">Hết hàng</span>
+            )}
           </div>
         </div>
         <div className="d-flex justify-content-center align-items-center mt-3 gap-2">
@@ -85,7 +104,11 @@ const CardModal = (props) => {
           <Button onClick={() => handleClose()} type="primary" danger>
             Huỷ
           </Button>
-          <Button type="primary" onClick={() => handleAddtoCart()}>
+          <Button
+            type="primary"
+            disabled={item.number === 0}
+            onClick={() => handleAddtoCart()}
+          >
             Thêm vào giỏ hàng
           </Button>
         </div>
