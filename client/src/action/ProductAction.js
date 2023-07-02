@@ -1,5 +1,6 @@
 import * as ProductApi from '../api/ProductRequest'
 
+//create product
 export const createProduct = (dataRequest) => async (dispatch) => {
   dispatch({ type: 'CREATE_PRODUCT_START' })
   try {
@@ -11,6 +12,7 @@ export const createProduct = (dataRequest) => async (dispatch) => {
   }
 }
 
+// update product
 export const updateProduct = (dataRequest) => async (dispatch) => {
   dispatch({ type: 'UPDATE_PRODUCT_START' })
   try {
@@ -22,6 +24,7 @@ export const updateProduct = (dataRequest) => async (dispatch) => {
   }
 }
 
+//delete product
 export const deleteProduct = (dataRequest) => async (dispatch) => {
   dispatch({ type: 'DELETE_PRODUCT_START' })
   try {
@@ -33,6 +36,7 @@ export const deleteProduct = (dataRequest) => async (dispatch) => {
   }
 }
 
+// get product
 export const getProduct = (dataRequest) => async (dispatch) => {
   dispatch({ type: 'GET_PRODUCT_START' })
   try {
@@ -44,6 +48,7 @@ export const getProduct = (dataRequest) => async (dispatch) => {
   }
 }
 
+//add to cart
 export const addProductToCart = (dataRequest) => async (dispatch) => {
   dispatch({ type: 'ADD_PRODUCT_TO_CART_START' })
   try {
@@ -55,6 +60,7 @@ export const addProductToCart = (dataRequest) => async (dispatch) => {
   }
 }
 
+// delete from cart
 export const deleteProductOnCart = (dataRequest) => async (dispatch) => {
   dispatch({ type: 'DELETE_PRODUCT_ON_CART_START' })
   try {
@@ -66,6 +72,7 @@ export const deleteProductOnCart = (dataRequest) => async (dispatch) => {
   }
 }
 
+// get cart by user
 export const getCartByUser = (id) => async (dispatch) => {
   dispatch({ type: 'GET_CART_BY_USER_START' })
   try {
@@ -77,6 +84,7 @@ export const getCartByUser = (id) => async (dispatch) => {
   }
 }
 
+// oder sản phẩm
 export const orderProduct = (id) => async (dispatch) => {
   dispatch({ type: 'ORDER_PRODUCT_START' })
   try {
@@ -88,6 +96,7 @@ export const orderProduct = (id) => async (dispatch) => {
   }
 }
 
+// get danh sách order
 export const getListOrder = (dataRequest) => async (dispatch) => {
   dispatch({ type: 'GET_LIST_ORDER_START' })
   try {
@@ -99,6 +108,7 @@ export const getListOrder = (dataRequest) => async (dispatch) => {
   }
 }
 
+// get order cho by ID
 export const getListOrderById = (dataRequest) => async (dispatch) => {
   dispatch({ type: 'GET_LIST_ORDER_BY_ID_START' })
   try {
@@ -110,6 +120,7 @@ export const getListOrderById = (dataRequest) => async (dispatch) => {
   }
 }
 
+// xác nhận order
 export const approveOrder = (dataRequest) => async (dispatch) => {
   dispatch({ type: 'APPROVE_ORDER_START' })
   try {
@@ -121,5 +132,6 @@ export const approveOrder = (dataRequest) => async (dispatch) => {
   }
 }
 
+//clear state
 export const clearStateProduct = () => (dispatch) =>
   dispatch({ type: 'CLEAR_STATE_PRODUCT' })
