@@ -60,6 +60,9 @@ const CartPage = () => {
     if (!e.target.checked) {
       newOrderList = newOrderList.filter((item) => item.id !== record.id)
       setOrderList(newOrderList)
+      setToTalAmount(
+        (prev) => prev - Number(record.price) * Number(record.number),
+      )
     }
   }
 
