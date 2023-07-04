@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import cloudinary from '../cloudinary/cloudinary.js'
-import productModel from '../Models/productModel.js'
+import productModel from '../models/productModel.js'
 import userModel from '../models/userModel.js'
 import { v4 as uuid } from 'uuid'
 import OrderModel from '../models/order.js'
@@ -82,7 +82,9 @@ export const getProduct = async (req, res) => {
           .sort({ createdAt: -1 })
           .skip((page - 1) * size)
           .limit(size)
-        const totalElement = await productModel.countDocuments()
+        const totalElement = await productModel.countDocuments({
+          title: { $regex: title, $options: 'i' },
+        })
         res.status(200).json({ data: newProduct, totalElement })
       }
       // tìm kiếm theo danh mục
@@ -94,7 +96,9 @@ export const getProduct = async (req, res) => {
           .sort({ createdAt: -1 })
           .skip((page - 1) * size)
           .limit(size)
-        const totalElement = await productModel.countDocuments()
+        const totalElement = await productModel.countDocuments({
+          category: category,
+        })
         res.status(200).json({ data: newProduct, totalElement })
       } else {
         const newProduct = await productModel
@@ -251,10 +255,12 @@ export const getListOrderById = async (req, res) => {
         .skip((page - 1) * size)
         .limit(size)
 
-      const totalElement = await OrderModel.countDocuments()
+      const totalElement = await OrderModel.countDocuments({
+        userId: userId.userId,
+      })
       res.status(200).json({ data: listOrder, totalElement })
     } else {
-      const listOrder = await productModel.find({ userId: userId.userId })
+      const listOrder = await OrderModel.find({ userId: userId.userId })
       res.status(200).json({ data: listOrder })
     }
   } catch (error) {
