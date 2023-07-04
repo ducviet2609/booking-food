@@ -104,7 +104,7 @@ const Checkout = () => {
                 </div>
 
                 <button type="submit" className="addtoCart_btn">
-                  Thanh toán
+                  Đặt hàng
                 </button>
               </form>
             </Col>

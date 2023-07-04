@@ -15,6 +15,7 @@ import ProductCard from '../components/product-card/ProductCard.jsx'
 import productCategoryImg01 from '../assets/image/hamburger.png'
 import productCategoryImg02 from '../assets/image/pizza.png'
 import productCategoryImg03 from '../assets/image/bread.png'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { clearStateProduct, getProduct } from '../action/ProductAction.js'
 import Loading from '../components/Loading/Loading.js'
@@ -104,8 +105,14 @@ const Home = () => {
               <div className="hero_service mt-5">
                 <p className="d-flex align-items-center gap-2">
                   <span className="shipping_icon">
-                    <i class="ri-car-line"></i>Miễn phí vận chuyển đơn hàng từ
-                    500k
+                    <i class="ri-car-line"></i>Giao hàng nhanh chóng
+                  </span>
+                </p>
+              </div>
+              <div className="hero_service mt-2">
+                <p className="d-flex align-items-center gap-2">
+                  <span className="shipping_icon">
+                    <i class="ri-car-line"></i>Thông tin bảo mật
                   </span>
                 </p>
               </div>
@@ -128,7 +135,7 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg="12" className="text-center mt-5">
-              <h2>Sản phẩm bán chạy</h2>
+              <h2>Sản phẩm</h2>
             </Col>
 
             <Col lg="12">

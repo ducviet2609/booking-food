@@ -59,8 +59,8 @@ const OrderMage = () => {
       },
     },
     {
-      align: 'Thông tin',
-      title: 'Giá',
+      align: 'center',
+      title: 'Thông tin',
       // dataIndex: 'price',
       key: 'price',
       render: (record) => {

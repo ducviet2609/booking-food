@@ -64,14 +64,20 @@ const OrderPage = () => {
       render: (record) => {
         return (
           <div className="d-flex flex-column">
-            {record && record.listCart.map((item) => <span>{item.title}</span>)}
+            {record &&
+              record.listCart.map((item) => (
+                <span>
+                  {' '}
+                  {item.title} - {item.number}
+                </span>
+              ))}
           </div>
         )
       },
     },
     {
-      align: 'Thông tin',
-      title: 'Giá',
+      align: 'center',
+      title: 'Thông tin',
       // dataIndex: 'price',
       key: 'price',
       render: (record) => {
@@ -79,7 +85,7 @@ const OrderPage = () => {
           <div className="d-flex flex-column">
             <span>Tên: {record.info.name}</span>
             <span>Email: {record.info.emmail}</span>
-            <span>SDT: {record.info.phone}</span>
+            <span>SĐT: {record.info.phone}</span>
             <span>Địa chỉ: {record.info.address}</span>
           </div>
         )

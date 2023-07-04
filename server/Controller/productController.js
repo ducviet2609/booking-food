@@ -27,7 +27,7 @@ export const createProduct = async (req, res) => {
     } else {
       const newProduct = new productModel(req.body)
       await newProduct.save()
-      res.status(200).json(productModel)
+      res.status(200).json(newProduct)
     }
   } catch (error) {
     res.status(500).json(error)
@@ -223,8 +223,8 @@ export const getListOrder = async (req, res) => {
       page = parseInt(page)
       size = parseInt(size)
       const listOrder = await OrderModel.find({})
-        .sort({ createdAt: -1 })
-        .skip((page - 1) * size)
+        .sort({ createdAt: -1 }) //ngày tạo
+        .skip((page - 1) * size) // bỏ qua số bản ghi
         .limit(size)
       const totalElement = await OrderModel.countDocuments()
       res.status(200).json({ data: listOrder, totalElement })

@@ -7,8 +7,6 @@ const productReducer = (
     isDeleteProductSucces: false,
     loading: false,
     error: false,
-    uploading: false,
-    updating: false,
     isAddToCartSuccess: false,
     isDeleteOnCartSuccess: false,
     isApproveSuccess: false,

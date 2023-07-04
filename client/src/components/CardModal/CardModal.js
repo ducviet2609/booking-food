@@ -4,7 +4,7 @@ import './CardModal.css'
 import { useSnackbar } from 'notistack'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { addProductToCart, clearStateProduct } from '../../action/ProductAction'
+import { addProductToCart } from '../../action/ProductAction'
 const CardModal = (props) => {
   const { item, openCardModal, setOpenCardModal } = props
   const user = useSelector((state) => state.authReducer.authData)
