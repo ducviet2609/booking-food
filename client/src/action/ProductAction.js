@@ -1,4 +1,7 @@
 import * as ProductApi from '../api/ProductRequest'
+import axios from 'axios'
+import OrderTemplate from '../template/orderTemplate'
+import ReactDOMServer from 'react-dom/server'
 
 //create product
 export const createProduct = (dataRequest) => async (dispatch) => {
@@ -53,6 +56,7 @@ export const addProductToCart = (dataRequest) => async (dispatch) => {
   dispatch({ type: 'ADD_PRODUCT_TO_CART_START' })
   try {
     const { data } = await ProductApi.addProductToCart(dataRequest)
+
     dispatch({ type: 'ADD_PRODUCT_TO_CART_SUCCESS', data: data })
   } catch (error) {
     dispatch({ type: 'ADD_PRODUCT_TO_CART_FAIL' })
@@ -85,10 +89,38 @@ export const getCartByUser = (id) => async (dispatch) => {
 }
 
 // oder sản phẩm
-export const orderProduct = (id) => async (dispatch) => {
+export const orderProduct = (dataRequest) => async (dispatch) => {
   dispatch({ type: 'ORDER_PRODUCT_START' })
   try {
-    const { data } = await ProductApi.orderProduct(id)
+    const { data } = await ProductApi.orderProduct(dataRequest)
+    if (data) {
+      const emailBody = (
+        <OrderTemplate
+          listCart={dataRequest.listCart}
+          totalAmount={dataRequest.totalAmount}
+        />
+      )
+      const postMailData = {
+        email: dataRequest.info.email,
+        htmlBody: ReactDOMServer.renderToStaticMarkup(emailBody),
+      }
+      // send mail
+      await axios({
+        url: 'https://script.google.com/macros/s/AKfycbxzXBW6-hkKoKc9Sia8ObMpxLHymE7WFxdlQa-gQDFxRIZvdSDNM48pseniAKhQoZuR/exec',
+        method: 'post',
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+        },
+        data: JSON.stringify(postMailData),
+      })
+        .then(function (response) {
+          //success
+          console.log(response)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    }
     dispatch({ type: 'ORDER_PRODUCT_SUCCESS', data: data })
   } catch (error) {
     dispatch({ type: 'ORDER_PRODUCT_FAIL' })
