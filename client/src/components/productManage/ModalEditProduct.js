@@ -7,7 +7,7 @@ const ModalEditProduct = (props) => {
   const { isOpenModalEdit, setIsOpenModalEdit, itemProduct } = props
 
   const dispatch = useDispatch()
-  const loading = useSelector((state) => state.productReducer.loading)
+  // const loading = useSelector((state) => state.productReducer.loading)
   const { isUpdateProductSucces } = useSelector((state) => state.productReducer)
 
   const [dataRequest, setDataRquest] = useState({

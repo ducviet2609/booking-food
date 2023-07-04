@@ -28,10 +28,7 @@ const orderTemplate = (props) => {
           opacity: 0,
           overflow: 'hidden',
         }}
-      >
-        For what reason would it be advisable for me to think about business
-        content? That might be little bit risky to have crew member like them.
-      </div>
+      ></div>
       <table border={0} cellPadding={0} cellSpacing={0} width="100%">
         <tbody>
           <tr>
@@ -49,164 +46,6 @@ const orderTemplate = (props) => {
                 style={{ maxWidth: '600px' }}
               >
                 <tbody>
-                  <tr>
-                    <td
-                      align="center"
-                      valign="top"
-                      style={{ fontSize: 0, padding: '35px' }}
-                      bgcolor="#F44336"
-                    >
-                      <div
-                        style={{
-                          display: 'inline-block',
-                          maxWidth: '50%',
-                          minWidth: '100px',
-                          verticalAlign: 'top',
-                          width: '100%',
-                        }}
-                      >
-                        <table
-                          align="left"
-                          border={0}
-                          cellPadding={0}
-                          cellSpacing={0}
-                          width="100%"
-                          style={{ maxWidth: '300px' }}
-                        >
-                          <tbody>
-                            <tr>
-                              <td
-                                align="left"
-                                valign="top"
-                                style={{
-                                  fontFamily:
-                                    'Open Sans, Helvetica, Arial, sans-serif',
-                                  fontSize: '36px',
-                                  fontWeight: 800,
-                                  lineHeight: '48px',
-                                }}
-                                className="mobile-center"
-                              >
-                                <h1
-                                  style={{
-                                    fontSize: '36px',
-                                    fontWeight: 800,
-                                    margin: 0,
-                                    color: '#ffffff',
-                                  }}
-                                >
-                                  BBBootstrap
-                                </h1>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div
-                        style={{
-                          display: 'inline-block',
-                          maxWidth: '50%',
-                          minWidth: '100px',
-                          verticalAlign: 'top',
-                          width: '100%',
-                        }}
-                        className="mobile-hide"
-                      >
-                        <table
-                          align="left"
-                          border={0}
-                          cellPadding={0}
-                          cellSpacing={0}
-                          width="100%"
-                          style={{ maxWidth: '300px' }}
-                        >
-                          <tbody>
-                            <tr>
-                              <td
-                                align="right"
-                                valign="top"
-                                style={{
-                                  fontFamily:
-                                    'Open Sans, Helvetica, Arial, sans-serif',
-                                  fontSize: '48px',
-                                  fontWeight: 400,
-                                  lineHeight: '48px',
-                                }}
-                              >
-                                <table
-                                  cellSpacing={0}
-                                  cellPadding={0}
-                                  border={0}
-                                  align="right"
-                                >
-                                  <tbody>
-                                    <tr>
-                                      <td
-                                        style={{
-                                          fontFamily:
-                                            'Open Sans, Helvetica, Arial, sans-serif',
-                                          fontSize: '18px',
-                                          fontWeight: 400,
-                                        }}
-                                      >
-                                        <p
-                                          style={{
-                                            fontSize: '18px',
-                                            fontWeight: 400,
-                                            margin: 0,
-                                            color: '#ffffff',
-                                          }}
-                                        >
-                                          <a
-                                            href="#"
-                                            target="_blank"
-                                            style={{
-                                              color: '#ffffff',
-                                              textDecoration: 'none',
-                                            }}
-                                          >
-                                            Shop &nbsp;
-                                          </a>
-                                        </p>
-                                      </td>
-                                      <td
-                                        style={{
-                                          fontFamily:
-                                            'Open Sans, Helvetica, Arial, sans-serif',
-                                          fontSize: '18px',
-                                          fontWeight: 400,
-                                          lineHeight: '24px',
-                                        }}
-                                      >
-                                        <a
-                                          href="#"
-                                          target="_blank"
-                                          style={{
-                                            color: '#ffffff',
-                                            textDecoration: 'none',
-                                          }}
-                                        >
-                                          <img
-                                            src="https://img.icons8.com/color/48/000000/small-business.png"
-                                            width={27}
-                                            height={23}
-                                            style={{
-                                              display: 'block',
-                                              border: '0px',
-                                            }}
-                                          />
-                                        </a>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </td>
-                  </tr>
                   <tr>
                     <td
                       align="center"
@@ -238,7 +77,7 @@ const orderTemplate = (props) => {
                               }}
                             >
                               <img
-                                src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png"
+                                src=" https://vinpearlphuquocresort.com/wp-content/uploads/2021/09/icon-thanh-cong-300x300.png"
                                 width={125}
                                 height={120}
                                 style={{ display: 'block', border: '0px' }}
@@ -253,7 +92,7 @@ const orderTemplate = (props) => {
                                   margin: 0,
                                 }}
                               >
-                                Thank You For Your Order!
+                                Bạn đã đặt hàng thành công!
                               </h2>
                             </td>
                           </tr>
@@ -277,9 +116,8 @@ const orderTemplate = (props) => {
                                   color: '#777777',
                                 }}
                               >
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit. Praesentium iste ipsa numquam
-                                odio dolores, nam.
+                                Cảm ơn quý khách đã tin tưởng nhà hàng của chúng
+                                tôi! Đơn hàng sẽ được giao sớm nhất
                               </p>
                             </td>
                           </tr>
@@ -306,22 +144,7 @@ const orderTemplate = (props) => {
                                         padding: '10px',
                                       }}
                                     >
-                                      Order Confirmation #
-                                    </td>
-                                    <td
-                                      width="25%"
-                                      align="left"
-                                      bgcolor="#eeeeee"
-                                      style={{
-                                        fontFamily:
-                                          'Open Sans, Helvetica, Arial, sans-serif',
-                                        fontSize: '16px',
-                                        fontWeight: 800,
-                                        lineHeight: '24px',
-                                        padding: '10px',
-                                      }}
-                                    >
-                                      2345678
+                                      Thông tin đơn hàng
                                     </td>
                                   </tr>
                                   <tr>
@@ -337,7 +160,7 @@ const orderTemplate = (props) => {
                                         padding: '15px 10px 5px 10px',
                                       }}
                                     >
-                                      Purchased Item (1)
+                                      Mặt hàng đã mua (1)
                                     </td>
                                     <td
                                       width="25%"
@@ -351,7 +174,7 @@ const orderTemplate = (props) => {
                                         padding: '15px 10px 5px 10px',
                                       }}
                                     >
-                                      $100.00
+                                      1000000đ
                                     </td>
                                   </tr>
                                   <tr>
@@ -367,7 +190,7 @@ const orderTemplate = (props) => {
                                         padding: '5px 10px',
                                       }}
                                     >
-                                      Shipping + Handling
+                                      Phí vận chuyển
                                     </td>
                                     <td
                                       width="25%"
@@ -381,37 +204,7 @@ const orderTemplate = (props) => {
                                         padding: '5px 10px',
                                       }}
                                     >
-                                      $10.00
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td
-                                      width="75%"
-                                      align="left"
-                                      style={{
-                                        fontFamily:
-                                          'Open Sans, Helvetica, Arial, sans-serif',
-                                        fontSize: '16px',
-                                        fontWeight: 400,
-                                        lineHeight: '24px',
-                                        padding: '5px 10px',
-                                      }}
-                                    >
-                                      Sales Tax
-                                    </td>
-                                    <td
-                                      width="25%"
-                                      align="left"
-                                      style={{
-                                        fontFamily:
-                                          'Open Sans, Helvetica, Arial, sans-serif',
-                                        fontSize: '16px',
-                                        fontWeight: 400,
-                                        lineHeight: '24px',
-                                        padding: '5px 10px',
-                                      }}
-                                    >
-                                      $5.00
+                                      30000đ
                                     </td>
                                   </tr>
                                 </tbody>
@@ -442,7 +235,7 @@ const orderTemplate = (props) => {
                                         borderBottom: '3px solid #eeeeee',
                                       }}
                                     >
-                                      TOTAL
+                                      Tổng tiền
                                     </td>
                                     <td
                                       width="25%"
@@ -458,7 +251,7 @@ const orderTemplate = (props) => {
                                         borderBottom: '3px solid #eeeeee',
                                       }}
                                     >
-                                      $115.00
+                                      1000000đ
                                     </td>
                                   </tr>
                                 </tbody>
@@ -471,7 +264,7 @@ const orderTemplate = (props) => {
                   </tr>
                   <tr>
                     <td
-                      align="center"
+                      align="left"
                       height="100%"
                       valign="top"
                       width="100%"
@@ -482,7 +275,7 @@ const orderTemplate = (props) => {
                       bgcolor="#ffffff"
                     >
                       <table
-                        align="center"
+                        align="left"
                         border={0}
                         cellPadding={0}
                         cellSpacing={0}
@@ -492,7 +285,7 @@ const orderTemplate = (props) => {
                         <tbody>
                           <tr>
                             <td
-                              align="center"
+                              align="left"
                               valign="top"
                               style={{ fontSize: 0 }}
                             >
@@ -527,227 +320,14 @@ const orderTemplate = (props) => {
                                         }}
                                       >
                                         <p style={{ fontWeight: 800 }}>
-                                          Delivery Address
+                                          Địa chỉ giao hàng
                                         </p>
-                                        <p>
-                                          675 Massachusetts Avenue
-                                          <br />
-                                          11th Floor
-                                          <br />
-                                          Cambridge, MA 02139
-                                        </p>
+                                        <p>50 Đình Thôn Mỹ Đình Nam Từ Liêm</p>
                                       </td>
                                     </tr>
                                   </tbody>
                                 </table>
                               </div>
-                              <div
-                                style={{
-                                  display: 'inline-block',
-                                  maxWidth: '50%',
-                                  minWidth: '240px',
-                                  verticalAlign: 'top',
-                                  width: '100%',
-                                }}
-                              >
-                                <table
-                                  align="left"
-                                  border={0}
-                                  cellPadding={0}
-                                  cellSpacing={0}
-                                  width="100%"
-                                  style={{ maxWidth: '300px' }}
-                                >
-                                  <tbody>
-                                    <tr>
-                                      <td
-                                        align="left"
-                                        valign="top"
-                                        style={{
-                                          fontFamily:
-                                            'Open Sans, Helvetica, Arial, sans-serif',
-                                          fontSize: '16px',
-                                          fontWeight: 400,
-                                          lineHeight: '24px',
-                                        }}
-                                      >
-                                        <p style={{ fontWeight: 800 }}>
-                                          Estimated Delivery Date
-                                        </p>
-                                        <p>January 1st, 2016</p>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      align="center"
-                      style={{ padding: '35px', backgroundColor: '#ff7361' }}
-                      bgcolor="#1b9ba3"
-                    >
-                      <table
-                        align="center"
-                        border={0}
-                        cellPadding={0}
-                        cellSpacing={0}
-                        width="100%"
-                        style={{ maxWidth: '600px' }}
-                      >
-                        <tbody>
-                          <tr>
-                            <td
-                              align="center"
-                              style={{
-                                fontFamily:
-                                  'Open Sans, Helvetica, Arial, sans-serif',
-                                fontSize: '16px',
-                                fontWeight: 400,
-                                lineHeight: '24px',
-                                paddingTop: '25px',
-                              }}
-                            >
-                              <h2
-                                style={{
-                                  fontSize: '24px',
-                                  fontWeight: 800,
-                                  lineHeight: '30px',
-                                  color: '#ffffff',
-                                  margin: 0,
-                                }}
-                              >
-                                Get 30% off your next order.
-                              </h2>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td
-                              align="center"
-                              style={{ padding: '25px 0 15px 0' }}
-                            >
-                              <table border={0} cellSpacing={0} cellPadding={0}>
-                                <tbody>
-                                  <tr>
-                                    <td
-                                      align="center"
-                                      style={{ borderRadius: '5px' }}
-                                      bgcolor="#66b3b7"
-                                    >
-                                      <a
-                                        href="#"
-                                        target="_blank"
-                                        style={{
-                                          fontSize: '18px',
-                                          fontFamily:
-                                            'Open Sans, Helvetica, Arial, sans-serif',
-                                          color: '#ffffff',
-                                          textDecoration: 'none',
-                                          borderRadius: '5px',
-                                          backgroundColor: '#F44336',
-                                          padding: '15px 30px',
-                                          border: '1px solid #F44336',
-                                          display: 'block',
-                                        }}
-                                      >
-                                        Shop Again
-                                      </a>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      align="center"
-                      style={{ padding: '35px', backgroundColor: '#ffffff' }}
-                      bgcolor="#ffffff"
-                    >
-                      <table
-                        align="center"
-                        border={0}
-                        cellPadding={0}
-                        cellSpacing={0}
-                        width="100%"
-                        style={{ maxWidth: '600px' }}
-                      >
-                        <tbody>
-                          <tr>
-                            <td align="center">
-                              <img
-                                src="logo-footer.png"
-                                width={37}
-                                height={37}
-                                style={{ display: 'block', border: '0px' }}
-                              />
-                            </td>
-                          </tr>
-                          <tr>
-                            <td
-                              align="center"
-                              style={{
-                                fontFamily:
-                                  'Open Sans, Helvetica, Arial, sans-serif',
-                                fontSize: '14px',
-                                fontWeight: 400,
-                                lineHeight: '24px',
-                                padding: '5px 0 10px 0',
-                              }}
-                            >
-                              <p
-                                style={{
-                                  fontSize: '14px',
-                                  fontWeight: 800,
-                                  lineHeight: '18px',
-                                  color: '#333333',
-                                }}
-                              >
-                                675 Parko Avenue
-                                <br />
-                                LA, CA 02232
-                              </p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td
-                              align="left"
-                              style={{
-                                fontFamily:
-                                  'Open Sans, Helvetica, Arial, sans-serif',
-                                fontSize: '14px',
-                                fontWeight: 400,
-                                lineHeight: '24px',
-                              }}
-                            >
-                              <p
-                                style={{
-                                  fontSize: '14px',
-                                  fontWeight: 400,
-                                  lineHeight: '20px',
-                                  color: '#777777',
-                                }}
-                              >
-                                If you didn't create an account using this email
-                                address, please ignore this email or{' '}
-                                <a
-                                  href="#"
-                                  target="_blank"
-                                  style={{ color: '#777777' }}
-                                >
-                                  unsusbscribe
-                                </a>
-                                .
-                              </p>
                             </td>
                           </tr>
                         </tbody>
