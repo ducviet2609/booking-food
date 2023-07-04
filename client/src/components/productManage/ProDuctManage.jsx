@@ -92,7 +92,7 @@ const ProDuctManage = (props) => {
   const columns = [
     {
       title: 'Tên sản phẩm',
-      align: 'center',
+      align: '',
       dataIndex: 'title',
       key: 'title',
     },

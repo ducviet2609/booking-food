@@ -42,7 +42,7 @@ const OrderMage = () => {
   const columns = [
     {
       title: 'Danh sách sản phẩm',
-      align: 'center',
+      align: '',
       // dataIndex: 'title',
       key: 'listCart',
       render: (record) => {
@@ -59,7 +59,7 @@ const OrderMage = () => {
       },
     },
     {
-      align: 'center',
+      align: '',
       title: 'Thông tin',
       // dataIndex: 'price',
       key: 'price',
@@ -67,7 +67,7 @@ const OrderMage = () => {
         return (
           <div className="d-flex flex-column">
             <span>Tên: {record.info.name}</span>
-            <span>Email: {record.info.emmail}</span>
+            <span>Email: {record.info.email}</span>
             <span>SĐT: {record.info.phone}</span>
             <span>Địa chỉ: {record.info.address}</span>
           </div>
