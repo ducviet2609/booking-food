@@ -1,7 +1,7 @@
 import React from 'react'
 
 const orderTemplate = (props) => {
-  const { listCart, totalAmount } = props
+  const { listCart, totalAmount, info } = props
   console.log(listCart)
   return (
     <div>
@@ -147,7 +147,39 @@ const orderTemplate = (props) => {
                                       Thông tin đơn hàng
                                     </td>
                                   </tr>
-                                  <tr>
+                                  {listCart.map((item) => (
+                                    <tr>
+                                      <td
+                                        width="75%"
+                                        align="left"
+                                        style={{
+                                          fontFamily:
+                                            'Open Sans, Helvetica, Arial, sans-serif',
+                                          fontSize: '16px',
+                                          fontWeight: 400,
+                                          lineHeight: '24px',
+                                          padding: '15px 10px 5px 10px',
+                                        }}
+                                      >
+                                        {item.title} ({item.number})
+                                      </td>
+                                      <td
+                                        width="25%"
+                                        align="left"
+                                        style={{
+                                          fontFamily:
+                                            'Open Sans, Helvetica, Arial, sans-serif',
+                                          fontSize: '16px',
+                                          fontWeight: 400,
+                                          lineHeight: '24px',
+                                          padding: '15px 10px 5px 10px',
+                                        }}
+                                      >
+                                        {item.price * item.number}đ
+                                      </td>
+                                    </tr>
+                                  ))}
+                                  {/* <tr>
                                     <td
                                       width="75%"
                                       align="left"
@@ -176,7 +208,7 @@ const orderTemplate = (props) => {
                                     >
                                       1000000đ
                                     </td>
-                                  </tr>
+                                  </tr> */}
                                   <tr>
                                     <td
                                       width="75%"
@@ -251,7 +283,7 @@ const orderTemplate = (props) => {
                                         borderBottom: '3px solid #eeeeee',
                                       }}
                                     >
-                                      1000000đ
+                                      {totalAmount}đ
                                     </td>
                                   </tr>
                                 </tbody>
@@ -322,7 +354,7 @@ const orderTemplate = (props) => {
                                         <p style={{ fontWeight: 800 }}>
                                           Địa chỉ giao hàng
                                         </p>
-                                        <p>50 Đình Thôn Mỹ Đình Nam Từ Liêm</p>
+                                        <p>{info.address}</p>
                                       </td>
                                     </tr>
                                   </tbody>
