@@ -92,38 +92,37 @@ export const getCartByUser = (id) => async (dispatch) => {
 export const orderProduct = (dataRequest) => async (dispatch) => {
   dispatch({ type: 'ORDER_PRODUCT_START' })
   try {
-    debugger
-    // const { data } = await ProductApi.orderProduct(dataRequest)
-    // if (data) {
-    const emailBody = (
-      <OrderTemplate
-        listCart={dataRequest.listCart}
-        totalAmount={dataRequest.totalAmount}
-        info={dataRequest.info}
-      />
-    )
-    const postMailData = {
-      email: dataRequest.info.email,
-      htmlBody: ReactDOMServer.renderToStaticMarkup(emailBody),
+    const { data } = await ProductApi.orderProduct(dataRequest)
+    if (data) {
+      const emailBody = (
+        <OrderTemplate
+          listCart={dataRequest.listCart}
+          totalAmount={dataRequest.totalAmount}
+          info={dataRequest.info}
+        />
+      )
+      const postMailData = {
+        email: dataRequest.info.email,
+        htmlBody: ReactDOMServer.renderToStaticMarkup(emailBody),
+      }
+      // send mail
+      await axios({
+        url: 'https://script.google.com/macros/s/AKfycbxzXBW6-hkKoKc9Sia8ObMpxLHymE7WFxdlQa-gQDFxRIZvdSDNM48pseniAKhQoZuR/exec',
+        method: 'post',
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+        },
+        data: JSON.stringify(postMailData),
+      })
+        .then(function (response) {
+          //success
+          console.log(response)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     }
-    // send mail
-    await axios({
-      url: 'https://script.google.com/macros/s/AKfycbxzXBW6-hkKoKc9Sia8ObMpxLHymE7WFxdlQa-gQDFxRIZvdSDNM48pseniAKhQoZuR/exec',
-      method: 'post',
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-      },
-      data: JSON.stringify(postMailData),
-    })
-      .then(function (response) {
-        //success
-        console.log(response)
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-    // }
-    // dispatch({ type: 'ORDER_PRODUCT_SUCCESS', data: data })
+    dispatch({ type: 'ORDER_PRODUCT_SUCCESS', data: data })
   } catch (error) {
     dispatch({ type: 'ORDER_PRODUCT_FAIL' })
     console.log(error)
