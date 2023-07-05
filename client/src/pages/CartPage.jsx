@@ -150,7 +150,7 @@ const CartPage = () => {
         <Container>
           <Row>
             <Col lg="12">
-              {cartItems && cartItems.length === 0 ? (
+              {listCart && listCart.length === 0 ? (
                 <h5 className="mt-5 text-center">
                   Không có sản phẩm trong giỏ hàng
                 </h5>
