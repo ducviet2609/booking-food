@@ -12,7 +12,7 @@ import '../pages/page-style/paginate.css'
 import { clearStateProduct, getProduct } from '../action/ProductAction.js'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../components/Loading/Loading.js'
-import { notification } from 'antd'
+import { Pagination, notification } from 'antd'
 
 const Foods = () => {
   const dispatch = useDispatch()
@@ -32,7 +32,7 @@ const Foods = () => {
   const baseRequest = {
     title: '',
     page: 1,
-    size: 16,
+    size: 10,
   }
   const [searchItem, setsearchItem] = useState('')
   const [dataRequest, setDataRquest] = useState(baseRequest)
@@ -62,6 +62,19 @@ const Foods = () => {
       ...dataRequest,
       title: searchItem,
     }
+    dispatch(
+      getProduct({
+        ...newDataRequest,
+      }),
+    )
+  }
+
+  const handlePageChange = (page) => {
+    const newDataRequest = {
+      ...dataRequest,
+      page,
+    }
+    setDataRquest(newDataRequest)
     dispatch(
       getProduct({
         ...newDataRequest,
@@ -103,6 +116,14 @@ const Foods = () => {
               ))}
           </div>
         </Container>
+        <div className="d-flex justify-content-center mt-2">
+          <Pagination
+            current={dataRequest.page}
+            pageSize={dataRequest.size}
+            total={(listProduct && listProduct.totalElement) || 0}
+            onChange={(page) => handlePageChange(page)}
+          />
+        </div>
       </section>
       <Loading isLoading={loading} />
     </Helmet>
